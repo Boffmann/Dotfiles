@@ -1,0 +1,142 @@
+#!/bin/bash
+
+# The working directory relative to which the biggest file should be found
+SEARCHDIR="./"
+# File to cache results into to do some intermediate processing on it
+CACHE_FILE="/home/hendrik/.biggest_cache"
+# Variable to store the longest file path in character. Used for pretty printing
+LONGEST_FILENAME=0
+# True if search depth is limited
+IS_SEARCHDEPTH_LIMITED=false
+# Store the search depts into
+SEARCH_DEPTH=0
+# Search Limit
+SEARCH_LIMIT=10
+# True if search is files only
+IS_FILES_ONLY=false
+# True if absolute path should be shown
+IS_SHOW_ABSOLUTE=false
+# True if hidden files should be ignored
+IS_IGNORE_HIDDEN=false
+
+# Print out usage of biggest
+usage () {
+  echo "Usage: $0 [-d SEARCHDIR ] [-n DEPTH ] [-l SEARCH_LIMIT ] [ -f FILESONLY ] [ -h IGNORE_HIDDEN_FILES] [ -a SHOW_ABSOLUTE_PATH ]" 1>&2
+}
+
+# Pretty print two values using the longest filepath 
+pretty_print () {
+  printf "| %-7s | %-${LONGEST_FILENAME}s |\n" "$1" "$2"
+}
+
+# Constructs parameters for du and executes it
+perform_du () {
+  PARAMETER_DU="-a -h "
+  PARAMETER_FIND=""
+
+  if [ $IS_SEARCHDEPTH_LIMITED = true ]; then
+    PARAMETER_DU=$PARAMETER_DU"-d $SEARCH_DEPTH "
+    PARAMETER_FIND=( -maxdepth "$SEARCH_DEPTH" $PARAMETER_FIND)
+  fi
+  if [ $IS_FILES_ONLY = true ]; then
+    PARAMETER_FIND=( ${PARAMETER_FIND[@]} -type f)
+  fi
+
+  echo ${PARAMETER_DU}
+  echo "${PARAMETER_FIND[@]}"
+
+  if [ $IS_IGNORE_HIDDEN = true ]; then
+    find $SEARCHDIR ${PARAMETER_FIND[@]} -exec du $PARAMETER_DU {} + | grep -v "./\\." | sort -h -r | head -n $SEARCH_LIMIT | while read x; do store_in_file $x; done
+  else
+    find $SEARCHDIR ${PARAMETER_FIND[@]} -exec du $PARAMETER_DU {} + | sort -h -r | head -n $SEARCH_LIMIT | while read x; do store_in_file $x; done
+  fi
+}
+
+# Print the --- separator
+print_separator () {
+  SEPARATOR="|"
+  for I in {1..9}
+  do 
+   SEPARATOR="${SEPARATOR}-" 
+  done
+  SEPARATOR="${SEPARATOR}|"
+  for I in $(seq 1 $((LONGEST_FILENAME+2)))
+  do 
+   SEPARATOR="${SEPARATOR}-" 
+  done
+  SEPARATOR="${SEPARATOR}|"
+  echo $SEPARATOR
+}
+
+# Iterates over cache file, extracts filesize and name from each entry end prints it using pretty printing
+print_filesize_and_name () {
+  while read -r line; do
+    first=$(echo $line | cut -d' ' -f 1)
+    second=$(echo $line | cut -d' ' -f 2)
+    pretty_print $first $second
+  done < $CACHE_FILE
+}
+
+# Get the longest filepath in characters by iterating over cache file and examining each file path
+get_longest_filename_size () {
+  while read -r line; do
+    file_path=$(echo $line | cut -d' ' -f 2)
+    cur_num_of_chars=$(echo -n $file_path | wc -c)
+    if (( $cur_num_of_chars > $LONGEST_FILENAME )); then
+      LONGEST_FILENAME=$cur_num_of_chars
+    fi
+  done < $CACHE_FILE
+}
+
+# Store an entry in the cache file
+store_in_file () {
+  if [ $IS_SHOW_ABSOLUTE = true ]; then
+    # REL_PATH=$(realpath --relative-to="$SEARCHDIR" "$2")
+    ABS_PATH=$(realpath "$2")
+    echo "$1 $ABS_PATH" >> $CACHE_FILE
+  else
+    echo "$1 $2" >> $CACHE_FILE
+  fi
+}
+
+while getopts ":n:l:d:fah" options; do
+  case "${options}" in
+    n)
+      IS_SEARCHDEPTH_LIMITED=true
+      SEARCH_DEPTH=${OPTARG}
+      ;;
+    l)
+      SEARCH_LIMIT=${OPTARG}
+      ;;
+    d)
+      SEARCHDIR=${OPTARG}
+      ;;
+    f)
+      IS_FILES_ONLY=true
+      ;;
+    a)
+      IS_SHOW_ABSOLUTE=true
+      ;;
+    h)
+      IS_IGNORE_HIDDEN=true
+      ;;
+    *)
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+# Create empty cache file
+if [ ! -f "$CACHE_FILE" ]; then
+  touch $CACHE_FILE
+fi
+truncate -s 0 $CACHE_FILE
+# Use du to get biggest files in current directory and store results in the cache file
+perform_du
+get_longest_filename_size
+print_separator
+pretty_print "Size" "Path"
+print_separator
+print_filesize_and_name
+print_separator

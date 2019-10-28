@@ -1,0 +1,4 @@
+#!/bin/bash
+
+backlight=$(cat /tmp/backlight)
+xbacklight -set $backlight

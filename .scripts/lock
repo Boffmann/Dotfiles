@@ -1,0 +1,33 @@
+#!/bin/bash
+
+. ~/.scripts/my_script_config
+
+xbacklight -get | cut -d'.' -f1 > /tmp/backlight
+screenResolution=$(xdpyinfo  | grep 'dimensions:' | awk '{print $2}')
+backgroundImage="$wallpaper_dir"/wallpaper$screenResolution.jpg
+
+if test ! -f "$backgroundImage"; then
+    convert "$wallpaper_dir"/BlackPolygon.jpg -resize $screenResolution $backgroundImage
+fi
+
+xbacklight -set 10
+# i3lock -i $backgroundImage -n; ~/.scripts/unlock
+/opt/i3lock/i3lock -i $backgroundImage \
+  --clock \
+  --datestr="%A, %d.%m.%Y" \
+  --timepos="x+220:h-30" \
+  --datepos="x+220:h-110" \
+  --timecolor="ffffffff" \
+  --datecolor="ffffffff" \
+  --insidecolor="ffffff22" \
+  --ringcolor="000000ff" \
+  --linecolor="00000000" \
+  --bshlcolor="084d08ff" \
+  --keyhlcolor="084d08ff" \
+  --insidevercolor="ffffff22" \
+  --ringvercolor="545754ff" \
+  --insidewrongcolor="ffffff22" \
+  --ringwrongcolor="6e0000ff" \
+  --timesize=80 \
+  --datesize=30 \
+  -n; ~/.scripts/unlock

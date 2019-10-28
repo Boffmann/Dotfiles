@@ -1,0 +1,11 @@
+#!/bin/bash
+
+KEY_LAYOUT=$(~/.scripts/key_layout)
+
+if [ $KEY_LAYOUT = "DE" ]; then
+  setxkbmap us
+  ~/.scripts/notify/notify "Layout" "US"
+else
+  setxkbmap de
+  ~/.scripts/notify/notify "Layout" "DE"
+fi

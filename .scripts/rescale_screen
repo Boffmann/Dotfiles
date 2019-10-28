@@ -1,0 +1,8 @@
+#!/bin/bash
+
+currentResuolution=$(xdpyinfo  | grep 'dimensions:' | awk '{print $2}')
+if [ "1920x1080" = "$currentResuolution" ]; then
+    xrandr --output eDP1 --mode 2560x1440
+else
+    xrandr --output eDP1 --mode 1920x1080
+fi

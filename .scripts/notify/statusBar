@@ -1,0 +1,21 @@
+#!/bin/bash
+
+divisor=10
+
+numElements=$(($1 / $divisor))
+
+statusBar='['
+
+for i in $(seq 1 $numElements) 
+do
+    statusBar=$statusBar'#' 
+done
+
+for i in $(seq 1 $((100 / $divisor - $numElements)))
+do
+    statusBar=$statusBar'.'
+done
+
+statusBar=$statusBar']'
+
+echo $statusBar

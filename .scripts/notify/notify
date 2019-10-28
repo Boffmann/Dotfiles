@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -z "$3" ]; then
+    dunstify -r 1 -t 2500 $1 $2
+else
+    dunstify -r 1 -t 2500 $1 $2' '$3
+fi

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+WHEREAMI=$(cat /tmp/whereami)
+st -e /bin/zsh -c 'cd '$WHEREAMI'; /bin/zsh'

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This is required because otherwise it happens that the number increases but the screen gets darker
+sleep 0.2s
+
+backlight=$(xbacklight -get | cut -d'.' -f1)
+
+~/.scripts/notify/notifyChange Brightness $backlight
+echo $backlight'%'

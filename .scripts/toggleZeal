@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PID=$(pgrep -x "zeal")
+if [[ -z $PID ]]
+then
+  # Zeal not running, PID empty
+  zeal
+else
+  # Zeal running, stop it
+  kill -s TERM $PID
+fi

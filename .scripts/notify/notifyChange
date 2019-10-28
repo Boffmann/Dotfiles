@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sleep 0.1s
+
+case $1 in 
+    Volume)
+        volume=$(/bin/bash ${BASH_SOURCE%/*}/../volume)
+        volumeNumber=$(echo "$volume" | grep -o '[0-9]\+')
+        statusBar=$(/bin/bash ${BASH_SOURCE%/*}/statusBar $volumeNumber)
+        ${BASH_SOURCE%/*}/notify Volume $volume $statusBar 
+        ;;
+    Brightness)
+        if [ -z "$2" ]
+        then
+            brightness=0
+        else
+            brightness=$2
+        fi
+        brightnessNumber=$(echo "$brightness" | grep -o '[0-9]\+')
+        statusBar=$(/bin/bash ${BASH_SOURCE%/*}/statusBar $brightnessNumber)
+        ${BASH_SOURCE%/*}/notify Brightness $brightness $statusBar 
+        ;;
+esac

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ~/Dropbox/Unikrams/Master/3.Semester
+
+du -a | awk '{print $2}' | dmenu | xargs -r xdg-open

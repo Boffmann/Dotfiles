@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cp -r /home/hendrik/.config/i3/* /home/hendrik/Dropbox/Miscellaneous/Filedump/i3
+cp -r /home/hendrik/.scripts/* /home/hendrik/Dropbox/Miscellaneous/Filedump/scripts
+cp /home/hendrik/.vimrc /home/hendrik/Dropbox/Miscellaneous/Filedump/Vim/vimrcUbuntu
+cp /home/hendrik/.bashrc /home/hendrik/Dropbox/Miscellaneous/Filedump/
+cp -r /home/hendrik/.config/ranger/* /home/hendrik/Dropbox/Miscellaneous/Filedump/Ranger
+cp /home/hendrik/.config/dunst/dunstrc /home/hendrik/Dropbox/Miscellaneous/Filedump/dunst
+
+cp -r /home/hendrik/.scripts/* /home/hendrik/Documents/Repositories/Dotfiles/.scripts
