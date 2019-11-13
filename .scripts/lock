@@ -15,8 +15,9 @@ xbacklight -set 10
 /opt/i3lock/i3lock -i $backgroundImage \
   --clock \
   --datestr="%A, %d.%m.%Y" \
-  --timepos="x+220:h-30" \
-  --datepos="x+220:h-110" \
+  --timestr="%I:%M" \
+  --timepos="x+140:h-80" \
+  --datepos="x+190:h-30" \
   --timecolor="ffffffff" \
   --datecolor="ffffffff" \
   --insidecolor="ffffff22" \
