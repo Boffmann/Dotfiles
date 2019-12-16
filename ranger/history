@@ -1,0 +1,24 @@
+rename 
+rename Chrome Web Store.md
+rename DAQNavi_README_20181024.zip
+mkdir test
+shell set colorscheme snow
+search i3blocks
+rename davechild_i3-window-manager.pdf
+mkdir Definitions
+touch Definitions.md
+delete
+rename Definitions.tex
+rename Uebung8.tex
+
+open_with code
+rename Week19_Expectation_Maximization_handout.pdf
+rename libusb5856
+mkdir dunst
+rename 8Uebung
+rename Ausweis.pdf
+mkdir ExamPrep
+open_with 
+mkdir VergleichSoftwareTools
+touch vergleich.txt
+touch vergleich.tex

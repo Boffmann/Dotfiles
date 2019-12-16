@@ -13,11 +13,13 @@ fi
 xbacklight -set 10
 # i3lock -i $backgroundImage -n; ~/.scripts/unlock
 /opt/i3lock/i3lock -i $backgroundImage \
+  -t \
+  -e \
   --clock \
   --datestr="%A, %d.%m.%Y" \
   --timestr="%I:%M" \
-  --timepos="x+140:h-80" \
-  --datepos="x+190:h-30" \
+  --timepos="x+200:h-80" \
+  --datepos="tx:ty+50" \
   --timecolor="ffffffff" \
   --datecolor="ffffffff" \
   --insidecolor="ffffff22" \

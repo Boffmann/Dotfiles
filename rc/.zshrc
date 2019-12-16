@@ -1,7 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/home/hendrik/.scripts"
-# export JAVA_HOME=/opt/graalvm-ce-19.2.0.1/Contents/Home
+export PATH="$PATH:/home/hendrik/.scripts:/home/hendrik/miniconda3/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/hendrik/.oh-my-zsh"
@@ -118,14 +117,32 @@ alias uni='cd ~/Dropbox/Unikrams/Master/1.Semester/'
 alias uni1='cd ~/Dropbox/Unikrams/Master/1.Semester/'
 alias uni2='cd ~/Dropbox/Unikrams/Master/2.Semester/'
 alias uni3='cd ~/Dropbox/Unikrams/Master/3.Semester/'
+alias hiwi='cd ~/Dropbox/Unikrams/HiWi/DB/'
 alias unirepo='cd ~/Documents/UniRepos/'
 alias starthpivpn='snx'
 alias stophpivpn='snx -d'
 alias cal='ncal -b3'
 alias activedel='tput smkx'
 alias train="cd Documents/UniRepos/HiWi-DB/rca-lab/trainController"
+alias cdhyrise="cd ~/Documents/UniRepos/DyoD/hyrise"
 alias createcpptags="ctags --fields=+l --c-kinds=+p --c++-kinds=+p --extra=+q --recurse"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/hendrik/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/hendrik/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/hendrik/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/hendrik/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

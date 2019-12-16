@@ -9,7 +9,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Script folder
-set $scripts ~/.scripts
+set $scripts /home/hendrik/.scripts
 
 set $mod Mod4
 
@@ -177,7 +177,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         strip_workspace_numbers yes
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        status_command i3blocks -c /home/hendrik/.config/i3/i3blocks.conf
         # status_command i3status
         colors {
             background #2f343f
@@ -189,7 +189,7 @@ bar {
 for_window [class="Yad"] floating enable
 
 # Custom keybindings
-bindsym $mod+shift+x exec $scripts/lock 
+bindsym $mod+shift+x exec $scripts/lock
 bindsym $mod+shift+s exec $scripts/dmenuYesNo "Do you really want to shutdown?" "shutdown -h now"
 # Show date and battery
 bindsym $mod+shift+d exec $scripts/notify/notify Date $(date '+%Y-%m-%d %H:%M:%S')
@@ -202,7 +202,7 @@ bindsym $mod+shift+t exec $scripts/rescale_screen
 bindsym $mod+z exec $scripts/toggleZeal
 # Start firefox
 bindsym $mod+shift+f exec firefox
-bindsym $mod+shift+n exec nautilus 
+bindsym $mod+shift+n exec nautilus
 
 # Toggle keyboard layouts
 bindsym $mod+shift+v exec $scripts/toggle_key_layout
@@ -218,7 +218,10 @@ exec --no-startup-id nm-applet #Network Manager
 # to move workspaces between monitors
 # bindsym $mod+greater move container to output right
 # bindsym $mod+less move container to output Left
-bindsym $mod+m move workspace to output left
+bindsym $mod+Shift+greater move workspace to output right
+bindsym $mod+Shift+less move workspace to output left
+bindsym $mod+Shift+comma move workspace to output down
+bindsym $mod+Shift+period move workspace to output up
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%; exec pkill -RTMIN+10 i3blocks; exec $scripts/notify/notifyChange Volume #increase sound volume
@@ -239,4 +242,4 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Set background image on startup
-exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/ws_Outer_Space_Damask_1920x1080.jpg
+exec --no-startup-id feh --bg-scale /home/hendrik/Pictures/Wallpapers/ws_Outer_Space_Damask_1920x1080.jpg

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Returns either AM or PM depending on the current time
+time=$(date +'%H')
+
+if (( time < 12 )); then
+  echo "AM"
+else
+  echo "PM"
+fi

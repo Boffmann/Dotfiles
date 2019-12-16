@@ -21,12 +21,13 @@ Plugin 'christoomey/vim-system-copy'
 Plugin 'morhetz/gruvbox'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'tmhedberg/SimpylFold'
 Plugin 'suan/vim-instant-markdown', {'rpt': 'after'}
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'sheerun/vim-polyglot'
 
 "Plugin ReplaceWithRegister installed via airball
@@ -58,7 +59,7 @@ let g:airline_theme='bubblegum'
 " Security
 set modelines=0
 
-" Show abolute line number in current line and 
+" Show abolute line number in current line and
 " relative line numbers for every other line
 set number
 set relativenumber
@@ -75,6 +76,19 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
+
+" ensure that the highlight group gets created and is not cleared by future
+" colorscheme command
+:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" Create highlight group
+:highlight ExtraWhitespace ctermbg=red guibg=red
+" Show trailing whitespace:
+:match ExtraWhitespace /\s\+$/
+" Switch off :match highlighting.
+" :match
+" Show ExtraWhitespace as soon as leaving insert mode
+:au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+:au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " When a file has beed detected t ohave been changed outside of Vim, reload
 set autoread
@@ -128,7 +142,7 @@ let g:easytags_async = 1
 let g:easytags_events = ['BufWritePost']
 " Disable periodic updates
 let g:easytags_on_cursorhold = 0
-" Disable easytags syntax highlighting for cpp files (is done by bfrg/vim-cpp-modern)
+" Disable easytags syntax highlighting for python files (is done by bfrg/vim-cpp-modern)
 autocmd FileType python let b:easytags_auto_highlight = 0
 " Run :HightlightTags on startup
 " autocmd execute command
@@ -147,6 +161,15 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list = 1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+" Set python checker
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
+" Do not check automatically when saving file. To invoke check run
+" :SyntasticCheck
+let g:syntastic_mode_map = {
+  \ "mode": "passive",
+  \ "active_filetypes": [],
+  \ "passive_filetypes": [] }
 
 " commentary options
 " Set commentstring for cpp filetypes
@@ -156,7 +179,13 @@ autocmd FileType cpp setlocal commentstring=//%s
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
-let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = 'ra'
+" Use a leader instead of the actual named binding
+nmap <leader>p :CtrlP<cr>
+" Easy bindings for its various modes
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
 
 " Settings for markdown preview
 " Start new window when editing markdown
@@ -172,13 +201,6 @@ let g:instant_markdown_autostart = 0
 " without yanking it
 vnoremap p "_dP
 
-" Use a leader instead of the actual named binding
-nmap <leader>p :CtrlP<cr>
-
-" Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -189,6 +211,10 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 "Buffergator
 nmap <F7> :BuffergatorToggle<cr>
+" automatically update view when buffer list changes
+let g:buffergator_autoupdate = 1
+" Sort buffers based on their names
+let g:buffergator_sort_regime = "basename"
 
 " Map keys for switching between split windows
 nnoremap <C-J> <C-W><C-J>
@@ -214,8 +240,17 @@ let g:tagbar_show_linenumbers = 1
 " remap jump to tag
 " let g:tagbar_map_jump = "o"
 
-" Maps for vim-multiple-cursers
-let g:multi_cursor_select_all_word_key = '<C-a>'
+" Vim Polyglot
+" Disable individual language packs
+let g:polyglot_disabled = ['markdown']
+
+" Vim folding
+" Fold methods
+" set foldmethod=indent
+" set foldlevel=1
+" Use space in normal mode to toggle fold open/close.
+" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+" vnoremap <Space> zf
 
 " Maps for workflow
 " Replace all words (leader is \)
@@ -224,3 +259,5 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " map <Leader>v ciw<C-R>0<ESC>
 " Reread vimrc
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>c<space> :SyntasticCheck<CR>
+

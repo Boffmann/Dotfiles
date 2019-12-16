@@ -1,10 +1,18 @@
 #!/bin/bash
 
-cp -r ~/.config/i3/* ~/Dropbox/Miscellaneous/Filedump/i3
-cp -r ~/.scripts/* ~/Dropbox/Miscellaneous/Filedump/scripts
-cp ~/.vimrc ~/Dropbox/Miscellaneous/Filedump/Vim/vimrcUbuntu
-cp ~/.bashrc ~/Dropbox/Miscellaneous/Filedump/
-cp -r ~/.config/ranger/* ~/Dropbox/Miscellaneous/Filedump/Ranger
-cp ~/.config/dunst/dunstrc ~/Dropbox/Miscellaneous/Filedump/dunst
+cp -r /home/hendrik/.config/i3/* /home/hendrik/Dropbox/Miscellaneous/Filedump/i3
+cp -r /home/hendrik/.scripts/* /home/hendrik/Dropbox/Miscellaneous/Filedump/scripts
+cp /home/hendrik/.vimrc /home/hendrik/Dropbox/Miscellaneous/Filedump/Vim/vimrcUbuntu
+cp /home/hendrik/.bashrc /home/hendrik/Dropbox/Miscellaneous/Filedump/
+cp -r /home/hendrik/.config/ranger/* /home/hendrik/Dropbox/Miscellaneous/Filedump/Ranger
+cp /home/hendrik/.config/dunst/dunstrc /home/hendrik/Dropbox/Miscellaneous/Filedump/dunst
+cp -r /home/hendrik/.config/vis/* /home/hendrik/Dropbox/Miscellaneous/Filedump/vis
 
-cp -r ~/.scripts/* ~/Documents/Repositories/Dotfiles/.scripts
+cp -r /home/hendrik/.scripts/* /home/hendrik/Documents/Repositories/Dotfiles/.scripts
+cp /home/hendrik/.vimrc /home/hendrik/Documents/Repositories/Dotfiles/rc
+cp /home/hendrik/.bashrc /home/hendrik/Documents/Repositories/Dotfiles/rc
+cp /home/hendrik/.config/dunst/dunstrc /home/hendrik/Documents/Repositories/Dotfiles/rc
+cp /home/hendrik/.zshrc /home/hendrik/Documents/Repositories/Dotfiles/rc
+cp -r /home/hendrik/.config/i3/* /home/hendrik/Documents/Repositories/Dotfiles/i3/
+cp -r /home/hendrik/.config/ranger/* /home/hendrik/Documents/Repositories/Dotfiles/ranger/
+cp -r /home/hendrik/.config/vis/* /home/hendrik/Documents/Repositories/Dotfiles/vis

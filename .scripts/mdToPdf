@@ -1,0 +1,41 @@
+#!/bin/bash
+
+Geometry=".7in"
+
+usage() {
+  echo -e "Illegal number of arguments\n" \
+    " Usage: mdToPdf { Markdown file } { Output Name } [Geomitry Margin Default: $Geometry]\n\n" \
+    "To see what geometries are possible, run mdToPdf --geometry" 
+  exit 1
+}
+
+printGeometry() {
+  echo -e ""
+}
+
+options=$(getopt -o vhns --long help)
+if [ $? != 0 ] ; then
+  usage
+fi
+
+while true; do
+  case "$1" in
+    --help)
+      printGeometry; shift ;;
+    -- ) shift; break ;;
+    *) break ;;
+  esac
+done
+
+if [ "$#" -gt 3 ] || [ "$#" -lt 2 ]; then
+  usage
+fi
+
+if [ "$#" -eq 3 ]; then
+  Geometry="$3"
+fi
+
+
+
+
+pandoc $1 -V geometry:margin=$Geometry -o $2

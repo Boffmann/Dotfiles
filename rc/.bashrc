@@ -144,3 +144,19 @@ alias starthpivpn='snx'
 alias stophpivpn='snx -d'
 alias cal='ncal -b3'
 alias activedel='tput smkx'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/hendrik/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/hendrik/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/hendrik/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/hendrik/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
