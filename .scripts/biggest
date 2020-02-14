@@ -26,7 +26,7 @@ usage () {
   echo "Usage: $0 [-d SEARCHDIR ] [-n DEPTH ] [-l SEARCH_LIMIT ] [ -f FILESONLY ] [ -h IGNORE_HIDDEN_FILES] [ -a SHOW_ABSOLUTE_PATH ]" 1>&2
 }
 
-# Pretty print two values using the longest filepath 
+# Pretty print two values using the longest filepath
 pretty_print () {
   printf "| %-7s | %-${LONGEST_FILENAME}s |\n" "$1" "$2"
 }

@@ -104,7 +104,7 @@ export EDITOR=vim
 
 gno() {
     # do things with parameters like $1 such as
-    xdg-open "$1" &
+    xdg-open "$1" &!
 }
 
 alias checkupdates='sudo apt update && sudo apt upgrade && sudo /bin/bash /home/hendrik/.scripts/copyall'
