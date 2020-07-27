@@ -24,11 +24,12 @@ Plugin 'xolox/vim-misc'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'ycm-core/YouCompleteMe'
-Plugin 'tmhedberg/SimpylFold'
+" Plugin 'tmhedberg/SimpylFold'
 Plugin 'suan/vim-instant-markdown', {'rpt': 'after'}
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'terryma/vim-smooth-scroll'
 
 "Plugin ReplaceWithRegister installed via airball
 
@@ -243,6 +244,12 @@ let g:tagbar_show_linenumbers = 1
 " Vim Polyglot
 " Disable individual language packs
 let g:polyglot_disabled = ['markdown']
+
+" Map scrolling to enable smooth scrolling
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 20, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 20, 4)<CR>
 
 " Vim folding
 " Fold methods

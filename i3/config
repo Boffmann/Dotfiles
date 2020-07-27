@@ -101,11 +101,11 @@ set $workspace2 "2:  β  "
 set $workspace3 "3:  γ  "
 set $workspace4 "4:  δ  "
 set $workspace5 "5:  ε  "
-set $workspace6 "6:  η  "
-set $workspace7 "7:  θ  "
-set $workspace8 "8:  κ  "
+set $workspace6 "6:  φ  "
+set $workspace7 "7:  ζ  "
+set $workspace8 "8:  π  "
 set $workspace9 "9:  λ  "
-set $workspace10 "10:  μ  "
+set $workspace10 "10:  ψ  "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -171,6 +171,8 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+shift+p exec $scripts/notify/notify Penissize 21.6cm
+bindsym $mod+p exec $scripts/fzf/dmenu_open_electrical_books
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -193,7 +195,7 @@ bindsym $mod+shift+x exec $scripts/lock
 bindsym $mod+shift+s exec $scripts/dmenuYesNo "Do you really want to shutdown?" "shutdown -h now"
 # Show date and battery
 bindsym $mod+shift+d exec $scripts/notify/notify Date $(date '+%Y-%m-%d %H:%M:%S')
-bindsym $mod+shift+b exec $scripts/notify/notify Battery $(/bin/bash -c /usr/share/i3blocks/battery | awk '{print $1}' | head -n 1)
+bindsym $mod+shift+b exec $scripts/notify/notify Battery $(/bin/bash -c /usr/share/i3blocks/battery | head -n 1 | awk '{print $1 " " $3}')
 # Open File from Uni with dmenu
 bindsym $mod+shift+u exec $scripts/fzf/dmenu_open_uniDir
 # Rescale screen resolution

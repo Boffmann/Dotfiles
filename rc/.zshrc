@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/home/hendrik/.scripts:/home/hendrik/miniconda3/bin"
+export PATH="$PATH:/home/hendrik/.scripts:/home/hendrik/miniconda3/bin:${JAVA_HOME}/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/hendrik/.oh-my-zsh"
@@ -113,12 +113,15 @@ alias apktools='java -jar /opt/apkTool'
 alias dex2jar='~/Documents/Repositories/dex2jar/dex-tools/build/distributions/dex-tools/dex
 -tools-2.1-SNAPSHOT/d2j-dex2jar.sh'
 alias r='ranger'
+alias n='nautilus ./ &!'
 alias uni='cd ~/Dropbox/Unikrams/Master/1.Semester/'
 alias uni1='cd ~/Dropbox/Unikrams/Master/1.Semester/'
 alias uni2='cd ~/Dropbox/Unikrams/Master/2.Semester/'
 alias uni3='cd ~/Dropbox/Unikrams/Master/3.Semester/'
+alias uni4='cd ~/Dropbox/Unikrams/Master/4.Semester/'
 alias hiwi='cd ~/Dropbox/Unikrams/HiWi/DB/'
 alias unirepo='cd ~/Documents/UniRepos/'
+alias pdfbook='cd ~/Dropbox/Documents/PDFs/PDF\ Books'
 alias starthpivpn='snx'
 alias stophpivpn='snx -d'
 alias cal='ncal -b3'

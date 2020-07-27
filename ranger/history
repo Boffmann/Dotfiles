@@ -10,7 +10,6 @@ touch Definitions.md
 delete
 rename Definitions.tex
 rename Uebung8.tex
-
 open_with code
 rename Week19_Expectation_Maximization_handout.pdf
 rename libusb5856
@@ -22,3 +21,8 @@ open_with
 mkdir VergleichSoftwareTools
 touch vergleich.txt
 touch vergleich.tex
+! cd ~
+cd ~
+uni4
+
+open_with w

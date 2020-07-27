@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd ~/Dropbox/Unikrams/Master/4.Semester
+cd ~/Dropbox/Documents/PDFs/PDF\ Books/ElectricalEngineering
 
 du -a | awk '{print $2}' | dmenu | xargs -r xdg-open
