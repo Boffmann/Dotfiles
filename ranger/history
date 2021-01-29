@@ -24,5 +24,6 @@ touch vergleich.tex
 ! cd ~
 cd ~
 uni4
-
 open_with w
+find --name "*.
+

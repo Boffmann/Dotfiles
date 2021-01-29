@@ -75,6 +75,7 @@ SOLARIZED_THEME="dark"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source /home/hendrik/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/release.com
 
 # User configuration
 
@@ -119,6 +120,8 @@ alias uni1='cd ~/Dropbox/Unikrams/Master/1.Semester/'
 alias uni2='cd ~/Dropbox/Unikrams/Master/2.Semester/'
 alias uni3='cd ~/Dropbox/Unikrams/Master/3.Semester/'
 alias uni4='cd ~/Dropbox/Unikrams/Master/4.Semester/'
+alias uni5='cd ~/Dropbox/Unikrams/Master/5.Semester/Master_Thesis'
+alias adlink='cd ~/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/'
 alias hiwi='cd ~/Dropbox/Unikrams/HiWi/DB/'
 alias unirepo='cd ~/Documents/UniRepos/'
 alias pdfbook='cd ~/Dropbox/Documents/PDFs/PDF\ Books'

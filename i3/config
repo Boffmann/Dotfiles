@@ -200,11 +200,18 @@ bindsym $mod+shift+b exec $scripts/notify/notify Battery $(/bin/bash -c /usr/sha
 bindsym $mod+shift+u exec $scripts/fzf/dmenu_open_uniDir
 # Rescale screen resolution
 bindsym $mod+shift+t exec $scripts/rescale_screen
+# Execute script to setup screens
+bindsym $mod+i exec $scripts/setup_displays --setup
+bindsym $mod+shift+i exec $scripts/setup_displays --off
 # Toggle zeal
 bindsym $mod+z exec $scripts/toggleZeal
 # Start firefox
 bindsym $mod+shift+f exec firefox
 bindsym $mod+shift+n exec nautilus
+
+# arandr keybinds
+# bindsym $mod+m exec arandr /home/hendrik/.screenlayout/default.sh
+# bindsym $mod+Shift+m exec arandr /home/hendrik/.screenlayout/hamburg.sh
 
 # Toggle keyboard layouts
 bindsym $mod+shift+v exec $scripts/toggle_key_layout
@@ -218,10 +225,12 @@ exec --no-startup-id /usr/bin/dropbox start -i #Dropbox
 exec --no-startup-id nm-applet #Network Manager
 
 # to move workspaces between monitors
-# bindsym $mod+greater move container to output right
-# bindsym $mod+less move container to output Left
-bindsym $mod+Shift+greater move workspace to output right
-bindsym $mod+Shift+less move workspace to output left
+bindsym $mod+m focus output left
+bindsym $mod+minus focus output right
+bindsym $mod+comma focus output down
+bindsym $mod+period focus output up
+bindsym $mod+Shift+m move workspace to output left
+bindsym $mod+Shift+minus move workspace to output right
 bindsym $mod+Shift+comma move workspace to output down
 bindsym $mod+Shift+period move workspace to output up
 
