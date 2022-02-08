@@ -10,7 +10,7 @@ if test ! -f "$backgroundImage"; then
     convert "$wallpaper_dir"/BlackPolygon.jpg -resize $screenResolution $backgroundImage
 fi
 
-xbacklight -set 10
+xbacklight -set 5
 # i3lock -i $backgroundImage -n; ~/.scripts/unlock
 /opt/i3lock/i3lock -i $backgroundImage \
   -t \

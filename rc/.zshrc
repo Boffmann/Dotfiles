@@ -75,7 +75,9 @@ SOLARIZED_THEME="dark"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source /home/hendrik/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/release.com
+# source /home/hendrik/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/release.com
+
+export EVENTLIB="/home/hendrik/Dropbox/Unikrams/Master/5.Semester/Master_Thesis/libevent-2.1.12/"
 
 # User configuration
 
@@ -124,6 +126,7 @@ alias uni5='cd ~/Dropbox/Unikrams/Master/5.Semester/Master_Thesis'
 alias adlink='cd ~/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/'
 alias hiwi='cd ~/Dropbox/Unikrams/HiWi/DB/'
 alias unirepo='cd ~/Documents/UniRepos/'
+alias mt='cd ~/Documents/UniRepos/MT'
 alias pdfbook='cd ~/Dropbox/Documents/PDFs/PDF\ Books'
 alias starthpivpn='snx'
 alias stophpivpn='snx -d'
@@ -132,6 +135,7 @@ alias activedel='tput smkx'
 alias train="cd Documents/UniRepos/HiWi-DB/rca-lab/trainController"
 alias cdhyrise="cd ~/Documents/UniRepos/DyoD/hyrise"
 alias createcpptags="ctags --fields=+l --c-kinds=+p --c++-kinds=+p --extra=+q --recurse"
+alias python=python3
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"

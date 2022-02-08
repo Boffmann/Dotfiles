@@ -2,6 +2,9 @@
 
 SETUP=false
 OFF=false
+TOGGLE=false
+
+SETUP_FILE=/home/hendrik/.screen_setup
 
 while [[ $# -gt 0 ]]; do
   key="$1"
@@ -15,17 +18,49 @@ while [[ $# -gt 0 ]]; do
       OFF=true
       shift
       ;;
+    -t|--toggle)
+      TOGGLE=true
+      shift
+      ;;
     *) # unknown
       shift
       ;;
   esac
 done
 
+# NUM_SCREENS=$(xrandr -q | grep -ow "connected" | wc -l)
+if [ ! -f $SETUP_FILE ]; then
+  echo "Creating screen_setup file"
+  touch $SETUP_FILE
+  echo "1" > $SETUP_FILE
+fi
+
+NUM_SCREENS=$(cat $SETUP_FILE)
+echo "Num Screens = $NUM_SCREENS"
+
 if $OFF; then
-  xrandr --output DP1-1 --off ; xrandr --output DP1-2 --off
+  xrandr --output DP1-1 --off && xrandr --output DP1-2 --off
+  echo "1" > $SETUP_FILE
   exit 0
 fi
 
 if $SETUP; then
-  xrandr --output DP1-1 --auto --right-of eDP1 ; xrandr --output DP1-2 --auto --right-of DP1-1
+  xrandr --output DP1-1 --auto --right-of eDP1 && xrandr --output DP1-2 --auto --right-of DP1-1
+  echo "3" > $SETUP_FILE
+  exit 0
+fi
+
+if $TOGGLE; then
+  if [ "$NUM_SCREENS" == "1" ]; then
+    xrandr --output DP1-1 --auto --right-of eDP1 && xrandr --output DP1-2 --auto --right-of DP1-1
+    echo "3" > $SETUP_FILE
+    exit 0
+  elif [ "$NUM_SCREENS" == "3" ]; then
+    xrandr --output DP1-1 --off && xrandr --output DP1-2 --off
+    echo "1" > $SETUP_FILE
+    exit 0
+  else
+    echo "Unspecified"
+    exit 1
+  fi
 fi

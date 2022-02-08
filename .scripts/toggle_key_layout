@@ -2,8 +2,8 @@
 KEY_LAYOUT=$(~/.scripts/key_layout)
 
 if [ $KEY_LAYOUT = "DE" ]; then
-  setxkbmap gb
-  ~/.scripts/notify/notify "Layout" "GB"
+  setxkbmap us
+  ~/.scripts/notify/notify "Layout" "US"
 else
   setxkbmap de
   ~/.scripts/notify/notify "Layout" "DE"
