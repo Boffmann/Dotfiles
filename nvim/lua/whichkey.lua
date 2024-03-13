@@ -3,6 +3,27 @@ if not status_ok then
     return
 end
 
+-- Use Telescope GUI for Harpoon
+local harpoon = require("harpoon")
+local conf = require("telescope.config").values
+
+function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+-- End Use Telescope GUI for Harpoon
+
 local setup = {
     plugins = {
         marks = true, -- shows a list of your marks on ' and `
@@ -59,13 +80,13 @@ local setup = {
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
     triggers = "auto", -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
+    -- triggers = {"<leader>"}, -- or specify a list manually
     triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
         -- this is mostly relevant for key maps that start with a native binding
         -- most people should not need to change this
-        i = { "j", "k", "g" },
-        v = { "j", "k", "g" },
+        i = { "j", "k" },
+        v = { "j", "k" },
     },
 }
 
@@ -127,7 +148,10 @@ local mappings = {
     h = {
         name = "Harpoon",
         a = { "<cmd>lua require('harpoon'):list():append()<cr>", "Append" },
-        h = { "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", "Finder" },
+        h = { "<cmd>lua toggle_telescope(require('harpoon'):list())<cr>", "Finder" },
+        m = { "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", "Quick Menu" },
+        p = { "<cmd>lua require('harpoon'):list():prev()<cr>", "Previous" },
+        n = { "<cmd>lua require('harpoon'):list():next()<cr>", "Next" },
     },
 
     -- LSP keybindings
