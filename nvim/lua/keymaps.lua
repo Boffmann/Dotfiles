@@ -42,8 +42,8 @@ keymap("n", "<a-j>", "<esc>:m .+1<cr>==gi", opts) -- Alt-j
 keymap("n", "<a-k>", "<esc>:m .-2<cr>==gi", opts) -- Alt-k
 
 -- Harpoon navigation
-vim.keymap.set("n", "<C-S-P>", function() require('harpoon'):list():prev() end) -- Toggle previous buffer in Harpoon List (Control - Shift - P)
-vim.keymap.set("n", "<C-S-N>", function() require('harpoon'):list():next() end) -- Toggle next buffer in Harpoon List (Control - Shift - N)
+-- vim.keymap.set("n", "<C-S-P>", function() require('harpoon'):list():prev() end) -- Toggle previous buffer in Harpoon List (Control - Shift - P)
+-- vim.keymap.set("n", "<C-S-N>", function() require('harpoon'):list():next() end) -- Toggle next buffer in Harpoon List (Control - Shift - N)
 
 -- NVimTree
 -- keymap("n", "<F5>", "<cmd>NvimTreeToggle<cr>", opts)
@@ -75,3 +75,6 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+-- EasyMotion
+keymap("n", ",", "<Plug>(easymotion-prefix)", term_opts)

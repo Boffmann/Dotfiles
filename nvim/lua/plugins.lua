@@ -7,7 +7,7 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = {
-            'nvim-tree/nvim-web-devicons' 
+            'nvim-tree/nvim-web-devicons'
         },
     },
     {
@@ -16,14 +16,35 @@ return {
     {
         "tpope/vim-commentary"
     },
+    {
+        "easymotion/vim-easymotion"
+    },
     -- Harpoon
     {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
-    dependencies = { 
+    dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
         }
+    },
+    -- Tmux Vim Navigator
+    {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+        "TmuxNavigateLeft",
+        "TmuxNavigateDown",
+        "TmuxNavigateUp",
+        "TmuxNavigateRight",
+        "TmuxNavigatePrevious",
+    },
+    keys = {
+        { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+        { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+        { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+        { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+        { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+      },
     },
     -- Language Support
     {
