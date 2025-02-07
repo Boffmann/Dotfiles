@@ -21,6 +21,7 @@ opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
+-- opt.statuscolumn = "%l %r"
 opt.scrolloff = 5 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
@@ -46,6 +47,7 @@ opt.wrap = false -- Disable line wrap
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
 
 vim.cmd([[
 :autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red

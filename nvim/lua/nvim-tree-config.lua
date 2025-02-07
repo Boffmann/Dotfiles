@@ -16,11 +16,17 @@ end
 -- pass to setup along with your other options
 require("nvim-tree").setup {
   ---
-  on_attach = my_on_attach,
-  actions = {
-    open_file = {
-      quit_on_open = true,
+    sort = {
+        sorter = "case_sensitive"
     },
-  },
+    view = {
+        width = 40,
+    },
+    on_attach = my_on_attach,
+    actions = {
+        open_file = {
+        quit_on_open = true,
+        },
+    },
   ---
 }

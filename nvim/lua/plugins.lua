@@ -7,8 +7,13 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = {
-            'nvim-tree/nvim-web-devicons'
+            'echasnovski/mini.icons',
+            'nvim-lua/plenary.nvim'
         },
+    },
+    {
+        "goolord/alpha-nvim",
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
     {
         "karb94/neoscroll.nvim",
@@ -17,7 +22,10 @@ return {
         "tpope/vim-commentary"
     },
     {
-        "easymotion/vim-easymotion"
+        "ggandor/leap.nvim",
+        dependencies = {
+            {'tpope/vim-repeat'},
+        },
     },
     -- Harpoon
     {
@@ -28,49 +36,52 @@ return {
             "nvim-telescope/telescope.nvim",
         }
     },
-    -- Tmux Vim Navigator
-    {
-    "christoomey/vim-tmux-navigator",
-    cmd = {
-        "TmuxNavigateLeft",
-        "TmuxNavigateDown",
-        "TmuxNavigateUp",
-        "TmuxNavigateRight",
-        "TmuxNavigatePrevious",
+    { -- LSP Support
+        'neovim/nvim-lspconfig',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-path',
+        'hrsh7th/nvim-cmp',
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
     },
-    keys = {
-        { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-        { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-        { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-        { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-        { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-      },
-    },
-    -- Language Support
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
+        "akinsho/bufferline.nvim"
+    },
+    { -- Aerial (Outline whindow e.g. for showing methods in file)
+        'stevearc/aerial.nvim',
+        opts = {},
+        -- Optional dependencies
         dependencies = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},         -- Required
-            {'hrsh7th/cmp-nvim-lsp'},     -- Required
-            {'hrsh7th/cmp-buffer'},       -- Optional
-            {'hrsh7th/cmp-path'},         -- Optional
-            {'saadparwaiz1/cmp_luasnip'}, -- Optional
-            {'hrsh7th/cmp-nvim-lua'},     -- Optional
-
-            -- Snippets
-            {'L3MON4D3/LuaSnip'},             -- Required
-            {'rafamadriz/friendly-snippets'}, -- Optional
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+    },
+    { -- Display marks
+        "kshenoy/vim-signature"
+    },
+    -- Nvim DAP (Debuging)
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "nvim-neotest/nvim-nio"
         }
     },
     {
-        "kshenoy/vim-signature"
+        'mfussenegger/nvim-dap',
+        recommended = true,
+        desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
+
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            -- virtual text for the debugger
+            {
+            "theHamsta/nvim-dap-virtual-text",
+            opts = {},
+            },
+        },
+    },
+    {
+        "leoluz/nvim-dap-go"
     },
     -- Nvimtree (File Explorer)
     {
@@ -91,8 +102,20 @@ return {
     -- Toggle Term
     {
         'akinsho/toggleterm.nvim',
-        tag = "*",
-        config = true
+        version = "*",
+        config = true,
+    },
+    {
+    "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        },
+        build = "make tiktoken", -- Only on MacOS or Linux
+        opts = {
+        -- See Configuration section for options
+        },
+        -- See Commands section for default commands if you want to lazy load on them
     },
     -- Treesitter
     {
@@ -101,6 +124,9 @@ return {
     -- WhichKey (Key Binding extension)
     {
         "folke/which-key.nvim",
-        lazy = true,
+        event = "VeryLazy",
+        dependencies = {
+            {'echasnovski/mini.icons'},
+        }
     },
 }

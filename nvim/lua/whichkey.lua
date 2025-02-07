@@ -1,7 +1,6 @@
-local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then
-    return
-end
+-- if not status_ok then
+--     return
+-- end
 
 -- Use Telescope GUI for Harpoon
 local harpoon = require("harpoon")
@@ -47,28 +46,21 @@ local setup = {
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
     -- operators = { gc = "Comments" },
-    key_labels = {
-        -- override the label used to display some keys. It doesn't effect WK in any other way.
-        -- For example:
-        -- ["<space>"] = "SPC",
-        -- ["<cr>"] = "RET",
-        -- ["<tab>"] = "TAB",
-    },
     icons = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = "➜", -- symbol used between a key and it's label
         group = "+", -- symbol prepended to a group
     },
-    popup_mappings = {
+    keys = {
         scroll_down = "<c-d>", -- binding to scroll down inside the popup
         scroll_up = "<c-u>", -- binding to scroll up inside the popup
     },
-    window = {
+    win = {
         border = "rounded", -- none, single, double, shadow
-        position = "bottom", -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-        padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0,
+        padding = { 1, 1 }, -- extra window padding [top, right, bottom, left]
+        wo = {
+            winblend = 0,
+        }
     },
     layout = {
         height = { min = 4, max = 25 }, -- min and max height of the columns
@@ -76,17 +68,15 @@ local setup = {
         spacing = 3, -- spacing between columns
         align = "left", -- align columns left, center or right
     },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
+    filter = function(mapping)
+        -- enable this to hide mappings for which you didn't specify a label
+        -- example to exclude mappings without a description
+        -- return mapping.desc and mapping.desc ~= ""
+        return true
+    end,
     show_help = true, -- show help message on the command line when the popup is visible
-    triggers = "auto", -- automatically setup triggers
-    -- triggers = {"<leader>"}, -- or specify a list manually
-    triggers_blacklist = {
-        -- list of mode / prefixes that should never be hooked by WhichKey
-        -- this is mostly relevant for key maps that start with a native binding
-        -- most people should not need to change this
-        i = { "j", "k" },
-        v = { "j", "k" },
+    triggers = {
+        { "<auto>", mode = "nxso" },
     },
 }
 
@@ -99,89 +89,104 @@ local opts = {
     nowait = true, -- use `nowait` when creating keymaps
 }
 
-local mappings = {
-    ["q"] = { "<cmd>bdelete<CR>", "Kill Buffer" },  -- Close current file
-    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" }, -- File explorer
-
-    -- Arrangements
-    a = {
-        name = "Arrangements",
-        t = { "<cmd>tabnew<CR>", "New Tab" },
-        n = { "<cmd>tabn<CR>", "Next Tab" },
-        p = { "<cmd>tabp<CR>", "Previous Tab" },
-        f = { "<cmd>tabfirst<CR>", "Jump to first Tab" },
-        l = { "<cmd>tablast<CR>", "Jump to last Tab" },
-        g = { "tab", "Jump to last Tab" },
-        h = { "<cmd>split<CR>", "Split Horizontal" },
-        v = { "<cmd>vsplit<CR>", "Split Vertical" },
-    },
-
-    -- GoTo
-    g = {
-        name = "GoTo",
-        D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "To Declaration" },
-        d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "To Definition" },
-        i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "To Implementation" },
-        K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-        r = { "<cmd>lua require('telescope.builtin').lsp_references()<CR>", "Telescope References" },
-    },
-
-    -- Telescope
-    f = {
-        name = "File Search",
-        -- c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-        f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find files" },
-        t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern In All Files" },
-        r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-    },
-
-    s = {
-        name = "Search",
-        h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-        m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-        r = { "<cmd>Telescope registers<cr>", "Registers" },
-        j = { "<cmd>Telescope marks<cr>", "Marks" },
-        k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-        c = { "<cmd>Telescope commands<cr>", "Commands" },
-    },
-
-    h = {
-        name = "Harpoon",
-        a = { "<cmd>lua require('harpoon'):list():append()<cr>", "Append" },
-        h = { "<cmd>lua toggle_telescope(require('harpoon'):list())<cr>", "Finder" },
-        m = { "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", "Quick Menu" },
-        p = { "<cmd>lua require('harpoon'):list():prev()<cr>", "Previous" },
-        n = { "<cmd>lua require('harpoon'):list():next()<cr>", "Next" },
-    },
-
-    -- LSP keybindings
-    l = {
-        name = "LSP",
-        m = { "<cmd>Mason<cr>", "Mason UI for Lsp" },
-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        i = { "<cmd>LspInfo<cr>", "Info" },
-        l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-        f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Reformat Code" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = {
-            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-            "Workspace Symbols",
-        },
-    },
-    --Toggle Term
-    t = {
-        name = "Terminal",
-        n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" }, -- Node Terminal
-        t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" }, -- (Optional) Htop, If you have htop in linux
-        p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" }, -- Python Terminal
-        f = { "<cmd>ToggleTerm direction=float<cr>", "Float" }, -- Floating Terminal
-
-        -- Play with size according to your needs.
-        h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" }, -- Horizontal Terminal,
-        v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" }, -- Vertical Terminal
-    },
-}
-
-which_key.setup(setup)
-which_key.register(mappings, opts)
+local wk = require("which-key")
+wk.setup(setup)
+wk.add({
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer", nowait = true, remap = false },
+    { "<leader>q", "<cmd>bdelete<CR>", desc = "Kill Buffer", nowait = true, remap = false },
+    { "<leader>o", "<cmd>AerialToggle!<cr>", desc = "Toggle Aerial", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+     { "<leader>a", group = "Arrangements", nowait = true, remap = false },
+     { "<leader>af", "<cmd>tabfirst<CR>", desc = "Jump to first Tab", nowait = true, remap = false },
+     { "<leader>ag", "tab", desc = "Jump to last Tab", nowait = true, remap = false },
+     { "<leader>ah", "<cmd>split<CR>", desc = "Split Horizontal", nowait = true, remap = false },
+     { "<leader>al", "<cmd>tablast<CR>", desc = "Jump to last Tab", nowait = true, remap = false },
+     { "<leader>an", "<cmd>tabn<CR>", desc = "Next Tab", nowait = true, remap = false },
+     { "<leader>ap", "<cmd>tabp<CR>", desc = "Previous Tab", nowait = true, remap = false },
+     { "<leader>at", "<cmd>tabnew<CR>", desc = "New Tab", nowait = true, remap = false },
+     { "<leader>av", "<cmd>vsplit<CR>", desc = "Split Vertical", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+     { "<leader>f", group = "File Search", nowait = true, remap = false },
+     { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files", nowait = true, remap = false },
+     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File", nowait = true, remap = false },
+     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers", nowait = true, remap = false },
+     { "<leader>fg", "<cmd>Telescope live_grep <cr>", desc = "Find Text Pattern In All Files", nowait = true, remap = false },
+     { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "Marks", nowait = true, remap = false },
+     { "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "Jumps", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+     { "<leader>g", group = "GoTo", nowait = true, remap = false },
+     { "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "To Declaration", nowait = true, remap = false },
+     { "<leader>gK", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "Hover", nowait = true, remap = false },
+     { "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "To Definition", nowait = true, remap = false },
+     { "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "To Implementation", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+    { "<leader>h", group = "Harpoon", nowait = true, remap = false },
+    { "<leader>ha", "<cmd>lua require('harpoon'):list():add()<cr>", desc = "Add", nowait = true, remap = false },
+    { "<leader>hh", "<cmd>lua toggle_telescope(require('harpoon'):list())<cr>", desc = "Finder", nowait = true, remap = false },
+    { "<leader>hm", "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", desc = "Quick Menu", nowait = true, remap = false },
+    { "<leader>hn", "<cmd>lua require('harpoon'):list():next()<cr>", desc = "Next", nowait = true, remap = false },
+    { "<leader>hp", "<cmd>lua require('harpoon'):list():prev()<cr>", desc = "Previous", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+    { "<leader>l", group = "LSP", nowait = true, remap = false },
+    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols", nowait = true, remap = false },
+    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action", nowait = true, remap = false },
+    { "<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>", desc = "Reformat Code", nowait = true, remap = false },
+    { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info", nowait = true, remap = false },
+    { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action", nowait = true, remap = false },
+    { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason UI for Lsp", nowait = true, remap = false },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename", nowait = true, remap = false },
+    { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+    { "<leader>s", group = "Search", nowait = true, remap = false },
+    { "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands", nowait = true, remap = false },
+    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find Help", nowait = true, remap = false },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps", nowait = true, remap = false },
+    { "<leader>sm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages", nowait = true, remap = false },
+    { "<leader>sr", "<cmd>Telescope registers<cr>", desc = "Registers", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+    { "<leader>t", group = "Terminal", nowait = true, remap = false },
+    { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float", nowait = true, remap = false },
+    { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal", nowait = true, remap = false },
+    { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node", nowait = true, remap = false },
+    { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python", nowait = true, remap = false },
+    { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "Htop", nowait = true, remap = false },
+    { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical", nowait = true, remap = false },
+}, {mode = "n"})
+wk.add({
+    { "<leader>d", group = "Debugger", nowait = true, remap = false },
+    { "<leader>d<F5>", function() require("dap").continue() end, desc = "Run/Continue" },
+    { "<leader>d<F6>", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+    { "<leader>d<F10>", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>d<F11>", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>d<F12>", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
+    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>dP", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+    { "<leader>du", function() require("dapui").open() end, desc = "Open UI"},
+    { "<leader>dU", function() require("dapui").close() end, desc = "Close UI"},
+    { "<leader>dz", function() require("dapui").toggle() end, desc = "Toggle UI"},
+}, {mode = "n"})
+wk.add({
+    { "<leader>C", group = "Github Copilot", nowait = true, remap = false },
+    { "<leader>Cc", "<cmd>CopilotChatOpen<cr>", desc = "Open Chat"},
+    { "<leader>Cq", "<cmd>CopilotChatClose<cr>", desc = "Close Chat"},
+    { "<leader>Ct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat"},
+    { "<leader>Cr", "<cmd>CopilotChatReset<cr>", desc = "Reset Chat"},
+    { "<leader>Cs", "<cmd>CopilotChatStop<cr>", desc = "Stop current output"},
+}, {mode = "n"})
