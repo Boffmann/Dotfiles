@@ -3,6 +3,9 @@ return {
     {
         "ellisonleao/gruvbox.nvim"
     },
+    { -- Highlight focussed pane
+        'levouh/tint.nvim',
+    },
     -- Lualine (THE NEW EXTENSION ADDED IN CONFIGURATION)
     {
         'nvim-lualine/lualine.nvim',
