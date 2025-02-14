@@ -48,6 +48,14 @@ return {
         'williamboman/mason-lspconfig.nvim',
     },
     {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "nvimtools/none-ls.nvim",
+        },
+    },
+    {
         "akinsho/bufferline.nvim"
     },
     { -- Aerial (Outline whindow e.g. for showing methods in file)

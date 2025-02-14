@@ -1,5 +1,5 @@
 local autocmd_group = vim.api.nvim_create_augroup(
-    "Custom auto-commands",
+    "LspFormatting",
     {clear = true})
 
 function GoFmt()
@@ -17,4 +17,12 @@ vim.api.nvim_create_autocmd({'BufWritePre'}, {
     pattern = '*.go',
     callback = GoFmt,
     group = autocmd_group,
+})
+
+vim.api.nvim_create_autocmd({'BufWritePre'}, {
+    group = autocmd_group,
+    buffer = bufnr,
+    callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr })
+    end,
 })
