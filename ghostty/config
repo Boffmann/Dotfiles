@@ -1,0 +1,15 @@
+theme = GruvboxDarkHard
+
+font-family = "Hack Nerd Font Mono"
+font-size = 14.0
+font-thicken=true
+font-thicken-strength = 128
+
+shell-integration-features = no-cursor
+cursor-style = "block"
+
+macos-titlebar-proxy-icon = hidden
+
+window-decoration = true
+background-opacity = 0.95
+background-blur = 5
