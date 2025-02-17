@@ -99,3 +99,9 @@ dap.configurations.cpp = {
 
 require('dap-go').setup(go_config)
 require("dapui").setup()
+
+require("neotest").setup({
+  adapters = {
+    require("neotest-gtest").setup({})
+  }
+})

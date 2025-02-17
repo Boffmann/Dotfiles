@@ -39,7 +39,6 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
   require('cmp_nvim_lsp').default_capabilities()
 )
 
-
 -- Mason setup
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -102,4 +101,16 @@ require'lspconfig'.lua_ls.setup {
       },
     },
   },
+}
+
+require('lspconfig').pylsp.setup {
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    maxLineLength = 120,
+                },
+            },
+        },
+    },
 }

@@ -94,6 +94,13 @@ return {
     {
         "leoluz/nvim-dap-go"
     },
+    {
+        "nvim-neotest/neotest",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "alfaix/neotest-gtest"
+        }
+    },
     -- Nvimtree (File Explorer)
     {
         'nvim-tree/nvim-tree.lua',

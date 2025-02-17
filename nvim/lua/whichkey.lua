@@ -181,6 +181,7 @@ wk.add({
     { "<leader>du", function() require("dapui").open() end, desc = "Open UI"},
     { "<leader>dU", function() require("dapui").close() end, desc = "Close UI"},
     { "<leader>dz", function() require("dapui").toggle() end, desc = "Toggle UI"},
+    { "<leader>dT", function() require("neotest").summary.open() end, desc = "Open Neotest Summary"},
 }, {mode = "n"})
 wk.add({
     { "<leader>C", group = "Github Copilot", nowait = true, remap = false },
