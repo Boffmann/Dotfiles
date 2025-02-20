@@ -1,9 +1,17 @@
 theme = GruvboxDarkHard
 
-font-family = "Hack Nerd Font Mono"
+font-family = "IosevkaTreeLig Nerd Font"
+font-style = Medium
+font-style-bold = Bold
+font-style-italic = Medium Italic
+font-style-bold-italic = Bold Italic
 font-size = 14.0
 font-thicken=true
 font-thicken-strength = 128
+
+alpha-blending = linear-corrected
+macos-titlebar-style = tabs
+mouse-hide-while-typing = true
 
 shell-integration-features = no-cursor
 cursor-style = "block"
