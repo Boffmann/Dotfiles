@@ -18,6 +18,8 @@ cursor-style = "block"
 
 macos-titlebar-proxy-icon = hidden
 
+custom-shader = "./shader.glsl"
+
 window-decoration = true
-background-opacity = 0.95
-background-blur = 5
+background-opacity = 0.8
+background-blur = 7
