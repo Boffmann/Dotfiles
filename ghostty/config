@@ -10,7 +10,6 @@ font-thicken=true
 font-thicken-strength = 128
 
 alpha-blending = linear-corrected
-macos-titlebar-style = tabs
 mouse-hide-while-typing = true
 
 shell-integration-features = no-cursor
@@ -21,5 +20,5 @@ macos-titlebar-proxy-icon = hidden
 custom-shader = "./shader.glsl"
 
 window-decoration = true
-background-opacity = 0.8
+background-opacity = 0.9
 background-blur = 7

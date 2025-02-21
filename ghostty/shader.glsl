@@ -29,6 +29,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     float d = b(p,.4*tB - (.5+.5*cos(length(pF)*10.5 - t))*.5,.05);
     d = smoothstep(-aa,aa,abs(d) - aa*.95);
 
-    vec3 color = mix(vec3(0.023),vec3(1.),1.-d);
-    fragColor = vec4(mix(backColor, color, 0.01), 0.5);
+    vec3 color = mix(vec3(0.23),vec3(1.),1.-d);
+    fragColor = vec4(mix(backColor, color, 0.01), 0.1);
 }
