@@ -27,14 +27,14 @@ return {
     {
         "ggandor/leap.nvim",
         dependencies = {
-            {'tpope/vim-repeat'},
+            { 'tpope/vim-repeat' },
         },
     },
     -- Harpoon
     {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
         }
@@ -86,8 +86,8 @@ return {
             "rcarriga/nvim-dap-ui",
             -- virtual text for the debugger
             {
-            "theHamsta/nvim-dap-virtual-text",
-            opts = {},
+                "theHamsta/nvim-dap-virtual-text",
+                opts = {},
             },
         },
     },
@@ -114,7 +114,7 @@ return {
         'nvim-telescope/telescope.nvim',
         lazy = true,
         dependencies = {
-            {'nvim-lua/plenary.nvim'},
+            { 'nvim-lua/plenary.nvim' },
         }
     },
     -- Toggle Term
@@ -123,15 +123,29 @@ return {
         version = "*",
         config = true,
     },
+    -- Navigator for Zellij
     {
-    "CopilotC-Nvim/CopilotChat.nvim",
-        dependencies = {
-        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        "swaits/zellij-nav.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        keys = {
+            { "<c-h>", "<cmd>ZellijNavigateLeftTab<cr>",  { silent = true, desc = "navigate left or tab" } },
+            { "<c-j>", "<cmd>ZellijNavigateDown<cr>",     { silent = true, desc = "navigate down" } },
+            { "<c-k>", "<cmd>ZellijNavigateUp<cr>",       { silent = true, desc = "navigate up" } },
+            { "<c-l>", "<cmd>ZellijNavigateRightTab<cr>", { silent = true, desc = "navigate right or tab" } },
         },
-        build = "make tiktoken", -- Only on MacOS or Linux
+        opts = {},
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "github/copilot.vim" },                       -- or zbirenbaum/copilot.lua
+            { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        },
+        build = "make tiktoken",                            -- Only on MacOS or Linux
         opts = {
-        -- See Configuration section for options
+            copilot_no_virtual_text = true,
+            -- See Configuration section for options
         },
         -- See Commands section for default commands if you want to lazy load on them
     },
@@ -144,7 +158,7 @@ return {
         "folke/which-key.nvim",
         event = "VeryLazy",
         dependencies = {
-            {'echasnovski/mini.icons'},
+            { 'echasnovski/mini.icons' },
         }
     },
 }
