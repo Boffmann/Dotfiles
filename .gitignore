@@ -1,3 +1,5 @@
 **/lazy-lock.json
 **/gameboy.png
 ghostty/.DS_Store
+zellij/plugins
+zellij/config.kdl.bak
