@@ -1,22 +1,28 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/home/hendrik/.scripts:/home/hendrik/miniconda3/bin:${JAVA_HOME}/bin"
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$PATH:/Users/tjabben/.local/bin"
+export PATH="$PATH:/usr/local/texlive/2025/bin/universal-darwin"
+
+export KUBECONFIG=/Users/tjabben/repos/k8s-kubeconfig/kubeconfig.yaml
+export EDITOR="nvim"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/hendrik/.oh-my-zsh"
-
+export ZSH="/Users/tjabben/.oh-my-zsh"
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+export EZA_CONFIG_DIR=/Users/tjabben/.config/eza/
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="gruvbox"
-SOLARIZED_THEME="dark"
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="sunaku"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -37,7 +43,7 @@ SOLARIZED_THEME="dark"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -49,6 +55,8 @@ SOLARIZED_THEME="dark"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -68,16 +76,18 @@ SOLARIZED_THEME="dark"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+git
+zsh-syntax-highlighting
+zsh-autosuggestions
+autojump
+)
 
 source $ZSH/oh-my-zsh.sh
-# source /home/hendrik/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/release.com
-
-export EVENTLIB="/home/hendrik/Dropbox/Unikrams/Master/5.Semester/Master_Thesis/libevent-2.1.12/"
 
 # User configuration
 
@@ -101,58 +111,91 @@ export EVENTLIB="/home/hendrik/Dropbox/Unikrams/Master/5.Semester/Master_Thesis/
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-
-# Set default editor to vim
-export EDITOR=vim
-
-gno() {
-    # do things with parameters like $1 such as
-    xdg-open "$1" &!
-}
-
-alias checkupdates='sudo apt update && sudo apt upgrade && sudo /bin/bash /home/hendrik/.scripts/copyall'
-# alias gno='xdg-open'
-alias apktools='java -jar /opt/apkTool'
-alias dex2jar='~/Documents/Repositories/dex2jar/dex-tools/build/distributions/dex-tools/dex
--tools-2.1-SNAPSHOT/d2j-dex2jar.sh'
-alias r='ranger'
-alias n='nautilus ./ &!'
-alias uni='cd ~/Dropbox/Unikrams/Master/1.Semester/'
-alias uni1='cd ~/Dropbox/Unikrams/Master/1.Semester/'
-alias uni2='cd ~/Dropbox/Unikrams/Master/2.Semester/'
-alias uni3='cd ~/Dropbox/Unikrams/Master/3.Semester/'
-alias uni4='cd ~/Dropbox/Unikrams/Master/4.Semester/'
-alias uni5='cd ~/Dropbox/Unikrams/Master/5.Semester/Master_Thesis'
-alias adlink='cd ~/ADLINK/Vortex_v2/Device/VortexOpenSplice/6.10.4p2/HDE/x86_64.linux/'
-alias hiwi='cd ~/Dropbox/Unikrams/HiWi/DB/'
-alias unirepo='cd ~/Documents/UniRepos/'
-alias mt='cd ~/Documents/UniRepos/MT'
-alias pdfbook='cd ~/Dropbox/Documents/PDFs/PDF\ Books'
-alias starthpivpn='snx'
-alias stophpivpn='snx -d'
-alias cal='ncal -b3'
-alias activedel='tput smkx'
-alias train="cd Documents/UniRepos/HiWi-DB/rca-lab/trainController"
-alias cdhyrise="cd ~/Documents/UniRepos/DyoD/hyrise"
-alias createcpptags="ctags --fields=+l --c-kinds=+p --c++-kinds=+p --extra=+q --recurse"
-alias python=python3
-
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+# COS DB SETUP
+
+# END COS DB SETUP
+
+alias bat='bat --paging=always'
+alias mvnquickinstall="mvn -DskipTests -DskipTessa Dspotbugs.skip=true -Dfindbugs.skip=true -Dcheckstyle.skip=true clean install -T1C"
+alias nv='nvim'
+alias k='kubectl'
+alias gcf='git checkout `git branch -la | fzf`'
+alias tui='taskwarrior-tui'
+alias ff='fzf --preview="bat --color=always {}"'
+alias vff='vim $(fzf --preview="bat --color=always {}")'
+alias ls='eza'
+alias ll='eza -l'
+
+
+source ~/.artifactory_creds
+
+export VAULT_ADDR=https://vault-amer.adobe.net/
+
+####### ARGO STUFF ###########
+# export ARGO_SERVER='argo.ethos.corp.adobe.com:443'
+# export ARGO_HTTP1=true
+# export ARGO_SECURE=true
+# export ARGO_BASE_HREF=
+# export ARGO_TOKEN="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiJzcG46NDFhYmMwYzYtNzEyZC00NjE5LTliNzktYjk2ZGE3ZmZhODI1IiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZmE3YjFiNWEtN2IzNC00Mzg3LTk0YWUtZDJjMTc4ZGVjZWUxLyIsImlhdCI6MTcxNzUxMTYxMSwibmJmIjoxNzE3NTExNjExLCJleHAiOjE3MTc1MTU5OTYsImFjciI6IjEiLCJhaW8iOiJBVlFBcS84V0FBQUFFVS9ad0RpTHZOdTNidituL1QvTWt1aXBpYmlkWFpyeUk3ZytnbEEraGtMRGFhQVVVR3pwWjlRVnlhOUdqZ3NUZWo5d1h3TmRGOXdhU2FmNjNpRytLRzlVK253L1JkOHFkeCtTWUVENXpaMD0iLCJhbXIiOlsicHdkIiwibWZhIl0sImFwcGlkIjoiNzUyYzdkN2YtZTY1MS00YWMzLTkzOWItYTA0OWYzOTBlMTlhIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJUamFiYmVuIiwiZ2l2ZW5fbmFtZSI6IkhlbmRyaWsiLCJncm91cHMiOlsiMzIzNzBhMDEtNGI0YS00YTM5LWEyMmMtNDZkYWZiZjVlNDAwIiwiZjlkZGRkMDEtNWFiOC00NWU2LTllMjQtYWU5OTMxZDJjMzY2IiwiNmJmMDA1MDItZWE1Ny00ZmZkLTg5MWYtYjY5ZmM1YjA4NjMyIiwiY2ZiZDQ0MDItN2Y3Ni00OGIxLTg4M2QtMTIyNjgyM2NhZjQxIiwiZDY1MmM5MDQtY2QxNi00NTNiLTk0MGQtZGE1MDllYjM0YmQ2IiwiZGM3ODBhMGQtNTdlMy00ZDY4LTlmNjQtMDM0NzY1ZmEyNWJmIiwiYmMyNjM4MTUtZjZhYS00MWI2LTg0OWYtOTNkMWUyYzhmZWM2IiwiNzcwMTZlMTUtNDJiYi00ZDEyLWIzYzctYjQ4ZGMzYTQ0MjI4IiwiMmY2ZTQ2MTctYmNiZS00ZjRiLWFiYjUtYWI0ZTVhOTY1OGMwIiwiYjY1YjcxMjYtZTUzOS00MDBiLWI5YjUtMDAyZmVlZTlkODRjIiwiOWMwZmViMjYtZGY1My00NmE2LTlkMDktZjk3NGFlYTYyY2I3IiwiMmU5MWZiMmMtMGQxNC00MzQxLTgzNTctMjU3ZGQwY2FlYmIyIiwiNjczOWJkMzAtODk4NS00ZjhkLWEyNzUtZjljNWE1NTM2MmI2IiwiMzhhMjUyMzctZWI2Ni00NmUyLWFjZTQtMTlhMTFjMWFhNTY3IiwiNzlmNmM3MzktYTAxZC00OTEwLWFkZDctZDFhODRkMzBkZmZmIiwiMWIyYjM1M2EtNzY1MC00ZjNkLTgxMGEtODdjZWVjZGNiMmRjIiwiMWI0YTY3M2EtNWQ5MS00NzdlLTlkNDQtYzIzNzQ0YzVmNTZiIiwiZGI4NjA4M2ItNzBiMS00MDhhLWI3YjUtZjUwMTYyYjAzYTg5IiwiZmRiYzUzM2ItZGMxYi00OWVmLWI2ODMtOTY5YTUwY2E5OGIyIiwiOThhOGJlM2ItNWM2ZS00OTE5LWI0ODMtMDFlMTE2YmZmNGMwIiwiODVjMWI5NDItMmFjZC00MTU2LWI5ZGYtZWRiMzNjM2QxODk5IiwiYWZjZWZiNDctNjAzYS00ODVhLTljODEtNmQ3NWY1N2U3Y2NiIiwiOGRlODE0NDgtNTExMS00NzQzLWE3NDgtNTQzYjY4YWIzZGQxIiwiODBhOGQyNGItZjcyZi00YzU5LWIxNTEtMjZiZTk5ZTA4MTU0IiwiMzhkZThiNGUtZjNkNi00MGM3LTlhYWQtNTA1ZjZlZWQ2ZWI4IiwiNTE3YTE2NTAtY2NmZi00NjNjLTliZTktNGZhOWY5ODQ3ODQ1IiwiNWZmMGIxNTMtMmY5NS00ZmUyLTgyMDktOTUzMDg0NGNmNWQyIiwiMGY1OTE5NTQtYjBkZi00NmJhLTg1MWItZjA3ZjdiNWE4NDM3IiwiOThmOTMyNTctNzM4MS00YzE3LThmYTktZTMwYzE2Y2RlZjRiIiwiOTI3MTgyNTctNjA4MC00YWY5LThiNzEtNWZhODJlMzY5YzE5IiwiYjQ1MjU3NWEtMjUwZi00OGJmLTliZDAtZGY4OTU5ZDY0N2EyIiwiYmU3ZmE0NjAtYWFlYi00ZjYyLWFlZDQtODZmNGRiNTBiNzcyIiwiYjJjMmE3NjAtODgxZS00Yjg4LTg4NDAtOGIwYmQ0M2MwMjQ1IiwiYTQyZTEyNjMtNTIzOC00NDQxLTg4MDAtYTJiNzhkNGIyZWUyIiwiYmJiMjk1NjQtNmRlMC00MjlmLWFiYmUtZTNjMDFhZWU0NWU1IiwiOGI2YjBlNjUtODNlMS00MWI0LTkyNTYtZjAzNjQ4N2MxOGJjIiwiNTZjOTZiNmMtMGY5Mi00OTBlLTllOTEtZjMyMmZlZWUzYzc2IiwiYzE2NDMzNmQtYjViNS00ZTExLTg1MzEtY2JlMTgwMDc4ZWVhIiwiYjgzOWNhNmYtNTBkYi00MTJkLThiOTAtNWIwMjk1MTYwMmRmIiwiMjBlYmZjNzItZDJjZi00Y2VkLWEwMmMtNzhiYmVkOTNkMzBhIiwiOThiZTMwNzYtY2JjZC00YTcwLWJlNmItMzZmNjBlMGY0NGVjIiwiNjI2YTM1NzYtNmU1YS00YjliLTkwODItMTBhYWM1NjM0NTY0IiwiYTc1M2E1NzctYTFjZS00Mjc3LWE2NWQtNWRhNzdlMjU2MzE3IiwiYjNiMmMyNzctY2M4NC00YWEzLWJhN2ItYmQzYWY2ZjEzZWRkIiwiNjhkZjlhN2UtZjZiNi00MzQyLWIwZTctMGVkZmNhZGM3NGNmIiwiNDk5YmIyODEtNzI4Yy00YmJjLWI5YTMtZDkzMzNhOGZiYjBkIiwiZTUwNmU4ODItNDYyNS00MzJhLTk1MTMtOTNlYTgzYTA3NGI1IiwiYmZjY2ZlODUtYTg0Yy00ZWY0LWEzZTYtZThiOGE1YTUxMWQ1IiwiN2RlODEyODYtMzJkYS00MTA1LWJhYzUtZjBmMTQzNmYxYTQ5IiwiODhkYWFjODYtZTJjYS00NjZmLWFhOTYtNDgyMzQyOGY0YTViIiwiZGJlMGI4OTAtMzRjNi00ODk5LWE1Y2QtZGNjNjEyODcwNzM1IiwiOGE4NjY3OTQtMGRlZC00ZDMwLTgzZDMtZjE0NGNjZjdiYmZkIiwiNjgwZjZkOTQtYjUyNy00YzM4LWFmNWQtYzNiMTAxNjM5OGU4IiwiYWVjMTlmOTQtYzA4MC00ZjA2LWE5MDgtY2RjZjRmMDc0NzRlIiwiZDc5YTlkOTUtNWQ4My00MmRjLWIzMmItZDFhNDcwNzZiNGNmIiwiNjYyOWU1OWItYTBmNi00MjRhLTk1NjktNzkwNTNhMGUwNzhkIiwiMjFiZmEwOWQtNzQyYS00MTQyLWIyODItZGZkNTEyNGNiZWIzIiwiMzU3NzBlOWUtMDY4Zi00ODhmLWE1OWUtNzc4ZGMyMzkwMzk1IiwiNzZlNmI3YTQtYTE3My00MzEzLWE3ZDEtMzE0ZGY2MmYwZWVmIiwiY2UyNjhjYTUtY2E0Mi00Y2ZhLTg5MWItOTc4NTQyYjBmOGJjIiwiODM3ODY4YTktYjFkZC00NWNmLTg4ZmUtMTJmYTU5YTA0Mjk1IiwiYjVlZWQxYWEtYjcxMS00MDgzLTg3NjEtNzZmOTQ1NmY0NzVlIiwiZDBlZTBjYWQtOTUzOS00NTBjLWJhZDItYWNmMWUxNDRmNTdkIiwiNTg2NGQ1YWUtMWUyZi00OTc5LTg0M2EtYjk4NjVmMDkzNjA3IiwiYTA2NTYzYjQtYzgwOS00OWVmLTkyMjMtNjUxMzZlYjExZDdlIiwiZTE2MmU3YjctZTQwZS00M2QyLTliNzMtZjgyYzZhNzJjNjA1IiwiYzE0ODQ2YmEtMWE4OC00MGQ3LTk2OTItMzE4ZGU4YjcyYTJhIiwiNGNmZDhiYmItNzYxOS00Y2ZkLWFmNzctZDZjOTg2Y2U3MzAwIiwiYmM0NTRmYzEtNTM2OS00Y2ZkLWExYWItM2I0YzdiODA3YzdhIiwiMjk1ZGM5YzUtZjVkMS00NzZmLWJmOWMtZTYwMmQ3MzY5OTY2IiwiZGE0ZDYzYzYtOGEyZi00YWE4LTgzNTYtNWRiNmIwYjgzYjRmIiwiYjk2MDY3YzYtMzhlMy00NTcxLWE2OWUtNThkNGM4ZWY0ZjI3IiwiNzI0ODY4YzktZGFmNi00MGRlLWJmYjAtN2U4M2YwMzU3MGRhIiwiMWIxODhjY2UtMGE0Yi00ZmY2LWIyZDgtNzEyMzRiOTNhYTg3IiwiZjUzMjUzZDItODFlNi00NTk4LThhOWEtNDBjZjViMjFmMDk3IiwiYzhkNTVlZDItYTY4Yi00Y2VhLTlkMTktMTc4ZDlhNjNmMzI1IiwiYTJlODhmZDYtOTE5Yy00YmFlLWJiOTAtZGQ3NmRlODkxYWFjIiwiYTNkYTBkZDktMzAzYS00Nzg5LWFlYjctY2U2ZDljMTQ3MDAyIiwiNWZjOTE4ZGYtNTBlYy00YTkzLTg0ZTItYjA1ZmUyOWY5N2U4IiwiMDA0MzdmZTEtZDkyYS00NDM1LWE4ODQtMjZhOTc4NWQxNTVjIiwiNGFlZTgzZTEtMjdlNC00MzFhLTljMDEtOGRjZGVhYmZkNmRlIiwiNDNiMDMyZWMtMjQ3MC00NGI4LTk2ZmUtNjkzY2I3YzVmYThiIiwiOWYzZDhjZWQtZGRkMy00MjkwLWE2NzUtN2IwNDZmMzBmNjYzIiwiODQ5YmJiZWQtY2NiOS00NDgwLTg3OWQtYmI1MDkzNGEzZmYwIiwiZGQ4YWVhZWYtM2VjOS00YTNjLTg0NjUtYjUyM2ZiZmQ3Yjc3IiwiZTI1OGMxZjMtMDQyNy00YjBmLTlmNjMtNDZiOGZjYWU1MTIxIiwiMjhmODc5ZjYtZWIzMy00NTVhLTk1ZDEtNTFlZDZhZjA1NDUxIiwiMzE3MDI5ZmMtMGVjNC00MzI3LWFmZTktMzc5YzYxNmZiY2U1IiwiNWNkYmY3ZmMtNTdlMi00ZDZmLWE3NzgtMzBlYjBmYjZjOGU5IiwiNTdmMjg3ZmYtMWY4ZS00MzkxLTg1NzYtYmUwMGVkMjE2NmE1Il0sImlwYWRkciI6IjE5My4xMDUuMTM5LjEzMSIsIm5hbWUiOiJIZW5kcmlrIFRqYWJiZW4iLCJvaWQiOiIwOTc2YThmNC01ZTgxLTRjNTEtODU5MS05MDFlZmQ1YjM3M2MiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtNzYyOTc5NjE1LTIwMzE1NzUyOTktOTI5NzAxMDAwLTgzOTc5NSIsInJoIjoiMC5BU1lBV2h0Ny1qUjdoME9VcnRMQmVON080Y2JBcTBFdGNSbEdtM201YmFmX3FDVW1BQjguIiwic2NwIjoidXNlcl9pbXBlcnNvbmF0aW9uIiwic3ViIjoibk5IVTBMMlRlZHFpTFVqRnFGRUhPWFkwdExiYnE3N1R1WXhOZ21aYXF4OCIsInRpZCI6ImZhN2IxYjVhLTdiMzQtNDM4Ny05NGFlLWQyYzE3OGRlY2VlMSIsInVuaXF1ZV9uYW1lIjoidGphYmJlbkBhZG9iZS5jb20iLCJ1cG4iOiJ0amFiYmVuQGFkb2JlLmNvbSIsInV0aSI6IjdidHctZnNFalVLZHFyQ1J1YVV2QUEiLCJ2ZXIiOiIxLjAifQ.mQLfE3H7JkcUY18_hFiAEeHO_Laj6zd7ua8kDVETE_SpUNV0SdHsVHlMJrTAExBwaQkZ1eO7DWzIVUyL0ZS7EUeNiixPzPe6K5i9dqC5ZpBRMzsyEicPS6jkiYmNhUakc7Iyy3WZ4QSmbPeGi5z9VdE26lSHegb7U860xqUyXRdoB4seEEqtO8NrGnx-S0sL_v9nhojlExfAtbk_kK25S6bXDuYfOA9SU0C9FX7NUYQz0K5ffWOwN0Z2mNrg9cSH2R3kx5rcdFOkh7hzfObQ_bTfnkkxRY7B7UrfaNwcCep-VXhTOPUpSJDqFbjE5zHL7b-UzpNsIKAWow0V_6SseA"
+# export ARGO_NAMESPACE=ns-team-acp-cs--compositeservice-deploy--1f5681d1--na-3dde1f42 ; # or whatever your namespace is
+# export KUBECONFIG=/dev/null ;# recommended
+####### ARGO STUFF ###########
+
+# cd /Users/tjabben/OneDrive\ -\ Adobe/tiddlywiki && git add -A > /dev/null 2&>1 && git commit -m "$(date)" > /dev/null 2&>1
+# cd "$OLDPWD"
+
+# source "$HOME/.cargo/env"
+
+
+# Created by `pipx` on 2024-01-17 10:54:46
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+# eval "$(atuin init zsh --disable-up-arrow)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/hendrik/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/tjabben/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/hendrik/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/hendrik/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/tjabben/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/tjabben/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/hendrik/miniconda3/bin:$PATH"
+        export PATH="/Users/tjabben/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Configure fzf
+source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+# Bat theme
+export BAT_THEME="gruvbox-dark"
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/tjabben/.sdkman"
+[[ -s "/Users/tjabben/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/tjabben/.sdkman/bin/sdkman-init.sh"
