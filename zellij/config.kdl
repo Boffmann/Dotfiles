@@ -5,6 +5,13 @@ keybinds {
         // bind "Alt c" { Copy; }
     }
     locked {
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
+                floating true
+                ignore_case true
+                quick_jump true
+            }
+        }
         bind "Ctrl g" { SwitchToMode "Normal"; }
         // Switch panes with `Ctrl+hjkl`
         bind "Ctrl h" {
@@ -188,7 +195,7 @@ keybinds {
                 floating true
                 move_to_focused_tab true
             };
-            SwitchToMode "Normal"
+            SwitchToMode "Locked"
         }
         bind "c" {
             LaunchOrFocusPlugin "configuration" {
@@ -287,6 +294,7 @@ plugins {
     configuration location="zellij:configuration"
     plugin-manager location="zellij:plugin-manager"
     vim-zellij-navigator location="file:~/.config/zellij/plugins/vim-zellij-navigator.wasm"
+    room location="file:~/.config/zellij/plugins/room.wasm"
     zjframes location="file:~/.config/zellij/plugins/zjframes.wasm"
     zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         // Gruvbox Dark theme  for the `zjstatus` plugin
@@ -325,7 +333,8 @@ plugins {
 
         format_left   "#[bg=$bg2,fg=$fg3] {session} {mode}#[bg=$bg1]{tabs}"
         format_center "{notifications}"
-        format_right  "#[bg=$bg1,fg=$bg2]#[bg=$bg2,fg=$fg4] {command_user}@{command_host} #[bg=$bg2,fg=$fg3]#[bg=$fg3,fg=$bg1] {datetime} "
+        //format_right  "#[bg=$bg1,fg=$bg2]#[bg=$bg2,fg=$fg4] {command_user}@{command_host} #[bg=$bg2,fg=$fg3]#[bg=$fg3,fg=$bg1] {datetime} "
+        format_right  "#[bg=$bg2,fg=$fg3]#[bg=$fg3,fg=$bg1] {datetime} "
         format_space  "#[bg=$bg1,fg=$fg1]"
         format_hide_on_overlength "true"
         format_precedence "lrc"
@@ -368,15 +377,15 @@ plugins {
         notification_format_no_notifications ""
         notification_show_interval "10"
 
-        command_host_command    "uname -n"
-        command_host_format     "{stdout}"
-        command_host_interval   "0"
-        command_host_rendermode "static"
+        //command_host_command    "uname -n"
+        //command_host_format     "{stdout}"
+        //command_host_interval   "0"
+        //command_host_rendermode "static"
 
-        command_user_command    "whoami"
-        command_user_format     "{stdout}"
-        command_user_interval   "0"
-        command_user_rendermode "static"
+        //command_user_command    "whoami"
+        //command_user_format     "{stdout}"
+        //command_user_interval   "0"
+        //command_user_rendermode "static"
 
         datetime          "{format}"
         datetime_format   "%Y-%m-%d %H:%M"
@@ -387,6 +396,7 @@ plugins {
 // Plugins to load in the background when a new session starts
 load_plugins {
     vim-zellij-navigator
+    room
 //    zjframes {
 //        hide_frame_for_single_pane       "false"
 //        hide_frame_except_for_search     "true"
@@ -500,7 +510,7 @@ default_mode "locked"
 //   - true (default)
 //   - false
 //
-mouse_mode false
+mouse_mode true
 
 // Configure the scroll back buffer size
 // This is the number of lines zellij stores for each pane in the scroll back

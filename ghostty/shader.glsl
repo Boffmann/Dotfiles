@@ -10,15 +10,17 @@ float asympt(float x, float sp) { return x/(sp + x); }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord * (1.0 / iResolution.xy);
-    vec3 backColor = texture(iChannel0, uv).rgb;
+    vec4 backColor = texture(iChannel0, uv).rgba;
 
     vec2 st = (fragCoord.xy - .5*iResolution.xy)/iResolution.y;
-    float t = iTime*.2;
+    // float time = iTime;
+    float time = 7.4;
+    float t = time*.2;
     // vec2 m = ((iMouse.xy - iResolution.xy*.5)/iResolution.y) + vec2(cos(.5*t),sin(.5*t))*.5;
     vec2 m = vec2(1.0, 1.0);
     float sz = 8.*(1. - m.y*.5);
     float aa = sz/iResolution.y;
-    float tB = clamp(asympt(iTime - 1., 3.),0.,1.);
+    float tB = clamp(asympt(time - 1., 3.),0.,1.);
 
     vec2 p = st + m*.5;
     p *= rot(P*.125 + m.y*P*.125);
@@ -29,6 +31,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     float d = b(p,.4*tB - (.5+.5*cos(length(pF)*10.5 - t))*.5,.05);
     d = smoothstep(-aa,aa,abs(d) - aa*0.95);
 
-    vec3 color = mix(vec3(0.23),vec3(1.),1.-d);
-    fragColor = vec4(mix(backColor, color, 0.008), 0.2);
+    vec3 color = mix(vec3(0.001),vec3(1.0),1.-d);
+    // fragColor = vec4(mix(backColor, color, 0.008), 0.2);
+    fragColor = mix(backColor, vec4(color, 1.0), 0.01);
+    // fragColor = backColor;
 }

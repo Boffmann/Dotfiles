@@ -107,6 +107,7 @@ wk.add({
     { "<leader>ap", "<cmd>tabp<CR>",        desc = "Previous Tab",      nowait = true, remap = false },
     { "<leader>at", "<cmd>tabnew<CR>",      desc = "New Tab",           nowait = true, remap = false },
     { "<leader>av", "<cmd>vsplit<CR>",      desc = "Split Vertical",    nowait = true, remap = false },
+    { "<leader>aq", "<cmd>close<CR>",       desc = "Close Split",       nowait = true, remap = false },
 }, { mode = "n" })
 wk.add({
     { "<leader>f",  group = "File Search",                                    nowait = true,                           remap = false },
@@ -185,10 +186,18 @@ wk.add({
     { "<leader>dT",     function() require("neotest").summary.open() end,                                     desc = "Open Neotest Summary" },
 }, { mode = "n" })
 wk.add({
-    { "<leader>C",  group = "Github Copilot",     nowait = true,               remap = false },
-    { "<leader>Cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat" },
-    { "<leader>Cq", "<cmd>CopilotChatClose<cr>",  desc = "Close Chat" },
-    { "<leader>Ct", "<cmd>CopilotChatOpen<cr>",   desc = "Open Chat" },
-    { "<leader>Cr", "<cmd>CopilotChatReset<cr>",  desc = "Reset Chat" },
-    { "<leader>Cs", "<cmd>CopilotChatStop<cr>",   desc = "Stop current output" },
+    { "<leader>C",  group = "Augment AI",           nowait = true,                             remap = false },
+    { "<leader>Ct", "<cmd>Augment chat-toggle<cr>", desc = "Toggle Chat" },
+    { "<leader>Cc", "<cmd>Augment chat<cr>",        desc = "Send a message to Augment" },
+    { "<leader>Cn", "<cmd>Augment chat-new<cr>",    desc = "Start a new conversation" },
+    { "<leader>Cl", "<cmd>Augment log<cr>",         desc = "View the plugin log" },
+    { "<leader>Cs", "<cmd>Augment status<cr>",      desc = "View current status of the plugin" },
 }, { mode = "n" })
+-- wk.add({
+--     { "<leader>C",  group = "Github Copilot",     nowait = true,               remap = false },
+--     { "<leader>Cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat" },
+--     { "<leader>Cq", "<cmd>CopilotChatClose<cr>",  desc = "Close Chat" },
+--     { "<leader>Ct", "<cmd>CopilotChatOpen<cr>",   desc = "Open Chat" },
+--     { "<leader>Cr", "<cmd>CopilotChatReset<cr>",  desc = "Reset Chat" },
+--     { "<leader>Cs", "<cmd>CopilotChatStop<cr>",   desc = "Stop current output" },
+-- }, { mode = "n" })

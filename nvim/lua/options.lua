@@ -57,6 +57,11 @@ vim.cmd([[
 :au InsertLeave * match ExtraWhitespace /\s\+$/
 ]])
 
+-- vim.g.copilot_no_virtual_text = true
+-- vim.g.copilot_no_tab_map = true
+-- vim.g.copilot_no_preview = true
+-- vim.g.copilot_assume_mapped = true
+
 -- For ZelliJ
 vim.api.nvim_create_autocmd("VimLeave", {
     pattern = "*",
