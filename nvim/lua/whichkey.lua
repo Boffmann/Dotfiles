@@ -155,6 +155,7 @@ wk.add({
 wk.add({
     { "<leader>t",  group = "Terminal",                                 nowait = true,       remap = false },
     { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>",              desc = "Float",      nowait = true, remap = false },
+    { "<leader>tc", "<cmd>lua _CURSOR_AGENT_TOGGLE()<cr>",            desc = "Cursor Agent", nowait = true, remap = false },
     { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal", nowait = true, remap = false },
     { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>",                      desc = "Node",       nowait = true, remap = false },
     { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>",                    desc = "Python",     nowait = true, remap = false },
@@ -186,18 +187,18 @@ wk.add({
     { "<leader>dT",     function() require("neotest").summary.open() end,                                     desc = "Open Neotest Summary" },
 }, { mode = "n" })
 wk.add({
-    { "<leader>C",  group = "Augment AI",           nowait = true,                             remap = false },
-    { "<leader>Ct", "<cmd>Augment chat-toggle<cr>", desc = "Toggle Chat" },
-    { "<leader>Cc", "<cmd>Augment chat<cr>",        desc = "Send a message to Augment" },
-    { "<leader>Cn", "<cmd>Augment chat-new<cr>",    desc = "Start a new conversation" },
-    { "<leader>Cl", "<cmd>Augment log<cr>",         desc = "View the plugin log" },
-    { "<leader>Cs", "<cmd>Augment status<cr>",      desc = "View current status of the plugin" },
+    { "<leader>A",  group = "Augment AI",           nowait = true,                             remap = false },
+    { "<leader>At", "<cmd>Augment chat-toggle<cr>", desc = "Toggle Chat" },
+    { "<leader>Ac", "<cmd>Augment chat<cr>",        desc = "Send a message to Augment" },
+    { "<leader>An", "<cmd>Augment chat-new<cr>",    desc = "Toggle Chat" },
+    { "<leader>Al", "<cmd>Augment log<cr>",         desc = "View the plugin log" },
+    { "<leader>As", "<cmd>Augment status<cr>",      desc = "View current status of the plugin" },
 }, { mode = "n" })
--- wk.add({
---     { "<leader>C",  group = "Github Copilot",     nowait = true,               remap = false },
---     { "<leader>Cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat" },
---     { "<leader>Cq", "<cmd>CopilotChatClose<cr>",  desc = "Close Chat" },
---     { "<leader>Ct", "<cmd>CopilotChatOpen<cr>",   desc = "Open Chat" },
---     { "<leader>Cr", "<cmd>CopilotChatReset<cr>",  desc = "Reset Chat" },
---     { "<leader>Cs", "<cmd>CopilotChatStop<cr>",   desc = "Stop current output" },
--- }, { mode = "n" })
+wk.add({
+    { "<leader>C",  group = "Github Copilot",     nowait = true,               remap = false },
+    { "<leader>Cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat" },
+    { "<leader>Cq", "<cmd>CopilotChatClose<cr>",  desc = "Close Chat" },
+    { "<leader>Ct", "<cmd>CopilotChatOpen<cr>",   desc = "Open Chat" },
+    { "<leader>Cr", "<cmd>CopilotChatReset<cr>",  desc = "Reset Chat" },
+    { "<leader>Cs", "<cmd>CopilotChatStop<cr>",   desc = "Stop current output" },
+}, { mode = "n" })

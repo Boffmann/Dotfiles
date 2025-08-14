@@ -125,32 +125,38 @@ return {
     },
     -- Navigator for Zellij
     {
-        "swaits/zellij-nav.nvim",
-        lazy = true,
-        event = "VeryLazy",
-        keys = {
-            { "<c-h>", "<cmd>ZellijNavigateLeftTab<cr>",  { silent = true, desc = "navigate left or tab" } },
-            { "<c-j>", "<cmd>ZellijNavigateDown<cr>",     { silent = true, desc = "navigate down" } },
-            { "<c-k>", "<cmd>ZellijNavigateUp<cr>",       { silent = true, desc = "navigate up" } },
-            { "<c-l>", "<cmd>ZellijNavigateRightTab<cr>", { silent = true, desc = "navigate right or tab" } },
-        },
-        opts = {},
+        "hiasr/vim-zellij-navigator.nvim",
+        config = function()
+            require('vim-zellij-navigator').setup()
+        end
     },
+    -- {
+    --     "swaits/zellij-nav.nvim",
+    --     lazy = true,
+    --     event = "VeryLazy",
+    --     keys = {
+    --         { "<c-h>", "<cmd>ZellijNavigateLeftTab<cr>",  { silent = true, desc = "navigate left or tab" } },
+    --         { "<c-j>", "<cmd>ZellijNavigateDown<cr>",     { silent = true, desc = "navigate down" } },
+    --         { "<c-k>", "<cmd>ZellijNavigateUp<cr>",       { silent = true, desc = "navigate up" } },
+    --         { "<c-l>", "<cmd>ZellijNavigateRightTab<cr>", { silent = true, desc = "navigate right or tab" } },
+    --     },
+    --     opts = {},
+    -- },
     {
         'augmentcode/augment.vim',
     },
-    -- {
-    --     "CopilotC-Nvim/CopilotChat.nvim",
-    --     dependencies = {
-    --         { "github/copilot.vim" },                       -- or zbirenbaum/copilot.lua
-    --         { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-    --     },
-    --     build = "make tiktoken",                            -- Only on MacOS or Linux
-    --     opts = {
-    --         -- See Configuration section for options
-    --     },
-    --     -- See Commands section for default commands if you want to lazy load on them
-    -- },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "github/copilot.vim" },                       -- or zbirenbaum/copilot.lua
+            { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        },
+        build = "make tiktoken",                            -- Only on MacOS or Linux
+        opts = {
+            -- See Configuration section for options
+        },
+        -- See Commands section for default commands if you want to lazy load on them
+    },
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
