@@ -14,7 +14,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     vec2 st = (fragCoord.xy - .5*iResolution.xy)/iResolution.y;
     // float time = iTime;
-    float time = 7.4;
+    // float time = 7.4;
+    float time = 9.4;
     float t = time*.2;
     // vec2 m = ((iMouse.xy - iResolution.xy*.5)/iResolution.y) + vec2(cos(.5*t),sin(.5*t))*.5;
     vec2 m = vec2(1.0, 1.0);
@@ -33,6 +34,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     vec3 color = mix(vec3(0.001),vec3(1.0),1.-d);
     // fragColor = vec4(mix(backColor, color, 0.008), 0.2);
-    fragColor = mix(backColor, vec4(color, 1.0), 0.01);
+    if (uv.y < 0.7) {
+        fragColor = mix(backColor, vec4(color, 1.0), 0.01);
+    } else {
+        fragColor = backColor;
+    }
     // fragColor = backColor;
 }

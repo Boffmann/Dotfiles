@@ -1,21 +1,21 @@
-require "keymaps"
-require "options"
-require "lazy-config"
-require "custom-commands"
-require "colorscheme-config"
-require "tint-config"
-require "dashboard-config"
-require "neoscroll-config"
-require "lualine-config"
-require "aerial-config"
-require "harpoon-config"
-require "dap-config"
-require "nvim-tree-config"
-require "lsp-config"
-require "leap-config"
-require "bufferline-config"
-require "treesitter-config"
-require "toggleterm-config"
-require "structurizerlsp-config"
-require "telescope-config"
-require "whichkey"
+require("keymaps")
+require("options")
+require("lazy-config")
+require("custom-commands")
+require("colorscheme-config")
+require("tint-config")
+require("dashboard-config")
+require("neoscroll-config")
+require("lualine-config")
+require("aerial-config")
+require("harpoon-config")
+require("dap-config")
+require("nvim-tree-config")
+require("lsp-config")
+require("leap-config")
+require("bufferline-config")
+require("treesitter-config")
+require("toggleterm-config")
+require("structurizerlsp-config")
+require("telescope-config")
+require("whichkey")

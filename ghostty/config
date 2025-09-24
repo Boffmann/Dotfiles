@@ -1,4 +1,4 @@
-theme = GruvboxDarkHard
+theme = Gruvbox Dark Hard
 
 font-family = "IosevkaTreeLig Nerd Font"
 font-style = Medium
@@ -18,6 +18,9 @@ cursor-style = "block"
 macos-titlebar-proxy-icon = hidden
 
 custom-shader = "./shader.glsl"
+background-image="./skyline.png"
+background-image-position=bottom-center
+background-image-opacity="0.1"
 
 window-decoration = true
 background-opacity = 0.9
