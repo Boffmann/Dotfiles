@@ -14,14 +14,17 @@ mouse-hide-while-typing = true
 
 shell-integration-features = no-cursor
 cursor-style = "block"
+cursor-style-blink="false"
 
 macos-titlebar-proxy-icon = hidden
 
 custom-shader = "./shader.glsl"
 background-image="./skyline.png"
-background-image-position=bottom-center
-background-image-opacity="0.1"
+background-image-fit = contain
+background-image-position = bottom-center
+background-image-opacity = 0.15
 
 window-decoration = true
 background-opacity = 0.9
 background-blur = 7
+keybind = shift+enter=text:\x1b\r

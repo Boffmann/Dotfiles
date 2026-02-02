@@ -25,7 +25,7 @@ return {
 		"tpope/vim-commentary",
 	},
 	{
-		"ggandor/leap.nvim",
+		url = "https://codeberg.org/andyg/leap.nvim",
 		dependencies = {
 			{ "tpope/vim-repeat" },
 		},
@@ -142,13 +142,13 @@ return {
 		},
 		opts = {},
 	},
-	{
-		"augmentcode/augment.vim",
-		init = function()
-			vim.g.augment_disable_tab_mapping = true
-			vim.g.augment_disable_completions = true
-		end,
-	},
+	-- {
+	-- 	"augmentcode/augment.vim",
+	-- 	init = function()
+	-- 		vim.g.augment_disable_tab_mapping = true
+	-- 		vim.g.augment_disable_completions = true
+	-- 	end,
+	-- },
 	-- {
 	-- 	"github/copilot.vim",
 	-- init = function()
@@ -157,18 +157,16 @@ return {
 	-- 	vim.g.copilot_enabled = false
 	-- end,
 	-- },
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-		},
-		build = "make tiktoken", -- Only on MacOS or Linux
-		opts = {
-			-- See Configuration section for options
-		},
-		-- See Commands section for default commands if you want to lazy load on them
-	},
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	dependencies = {
+	-- 		{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+	-- 		{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+	-- 	},
+	-- 	build = "make tiktoken", -- Only on MacOS or Linux
+	-- 	opts = {
+	-- 	},
+	-- },
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
