@@ -18,7 +18,7 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
-    -- Normal --
+-- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts) -- left window
 keymap("n", "<C-k>", "<C-w>k", opts) -- up window
@@ -30,7 +30,6 @@ keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<c-down>", ":resize +2<cr>", opts)
 keymap("n", "<c-right>", ":vertical resize -2<cr>", opts)
 keymap("n", "<c-left>", ":vertical resize +2<cr>", opts)
-
 
 -- navigate buffers
 keymap("n", "<tab>", ":bnext<cr>", opts) -- Next Tab
@@ -64,7 +63,7 @@ keymap("v", "<a-k>", ":m .-2<cr>==", opts)
 
 -- Visual Block --
 -- Move text up and down
-    --Terminal --
+--Terminal --
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
@@ -75,4 +74,3 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
