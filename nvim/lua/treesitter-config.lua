@@ -9,7 +9,7 @@ configs.setup({
 		"java",
 		"javascript",
 		"elixir",
-		"markdown",
+		-- "markdown",
 		"vim",
 		"vimdoc",
 		"bash",

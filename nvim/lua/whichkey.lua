@@ -147,6 +147,13 @@ wk.add({
 		remap = false,
 	},
 	{
+		"<leader>fw",
+		"<cmd>Telescope grep_string <cr>",
+		desc = "Search word under curser across project",
+		nowait = true,
+		remap = false,
+	},
+	{
 		"<leader>fm",
 		"<cmd>Telescope marks<cr>",
 		desc = "Marks",
