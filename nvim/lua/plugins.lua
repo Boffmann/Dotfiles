@@ -22,9 +22,6 @@ return {
 		"karb94/neoscroll.nvim",
 	},
 	{
-		"tpope/vim-commentary",
-	},
-	{
 		url = "https://codeberg.org/andyg/leap.nvim",
 		dependencies = {
 			{ "tpope/vim-repeat" },
@@ -48,19 +45,10 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 	},
 	{
-		"jay-babu/mason-null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"nvimtools/none-ls.nvim",
-		},
-	},
-	{
 		"akinsho/bufferline.nvim",
 	},
 	{ -- Aerial (Outline whindow e.g. for showing methods in file)
 		"stevearc/aerial.nvim",
-		opts = {},
 		-- Optional dependencies
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -79,9 +67,6 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap",
-		recommended = true,
-		desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
-
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			-- virtual text for the debugger
@@ -121,7 +106,6 @@ return {
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
-		config = true,
 	},
 	-- Navigator for Zellij
 	{

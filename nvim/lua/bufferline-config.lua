@@ -14,20 +14,10 @@ options = {
   },
   highlights = {
     indicator_selected = {
-      guifg = {
-          attribute = "fg",
-          highlight = "Type"
-      },
-      guibg = {
-          attribute = "bg",
-          highlight = "Type"
-      },
+      fg = { attribute = "fg", highlight = "Type" },
+      bg = { attribute = "bg", highlight = "Type" },
     },
-    buffer_selected = {
-      gui = "NONE",
-    },
-    pick_selected = {
-      gui = "NONE",
-    },
+    buffer_selected = { bold = false, italic = false },
+    pick_selected = { bold = false, italic = false },
   },
 }

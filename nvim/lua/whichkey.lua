@@ -1,7 +1,3 @@
--- if not status_ok then
---     return
--- end
-
 -- Use Telescope GUI for Harpoon
 local harpoon = require("harpoon")
 local conf = require("telescope.config").values
@@ -102,7 +98,7 @@ wk.add({
 wk.add({
 	{ "<leader>a", group = "Arrangements", nowait = true, remap = false },
 	{ "<leader>af", "<cmd>tabfirst<CR>", desc = "Jump to first Tab", nowait = true, remap = false },
-	{ "<leader>ag", "tab", desc = "Jump to last Tab", nowait = true, remap = false },
+	{ "<leader>ag", "g<Tab>", desc = "Jump to last used Tab", nowait = true, remap = false },
 	{ "<leader>ah", "<cmd>split<CR>", desc = "Split Horizontal", nowait = true, remap = false },
 	{ "<leader>al", "<cmd>tablast<CR>", desc = "Jump to last Tab", nowait = true, remap = false },
 	{ "<leader>an", "<cmd>tabn<CR>", desc = "Next Tab", nowait = true, remap = false },
@@ -383,13 +379,6 @@ wk.add({
 		desc = "Run/Continue",
 	},
 	{
-		"<leader>d<F6>",
-		function()
-			require("dap").continue({ before = get_args })
-		end,
-		desc = "Run with Args",
-	},
-	{
 		"<leader>d<F10>",
 		function()
 			require("dap").step_over()
@@ -522,20 +511,4 @@ wk.add({
 		end,
 		desc = "Open Neotest Summary",
 	},
-}, { mode = "n" })
-wk.add({
-	{ "<leader>A", group = "Augment AI", nowait = true, remap = false },
-	{ "<leader>At", "<cmd>Augment chat-toggle<cr>", desc = "Toggle Chat" },
-	{ "<leader>Ac", "<cmd>Augment chat<cr>", desc = "Send a message to Augment" },
-	{ "<leader>An", "<cmd>Augment chat-new<cr>", desc = "Toggle Chat" },
-	{ "<leader>Al", "<cmd>Augment log<cr>", desc = "View the plugin log" },
-	{ "<leader>As", "<cmd>Augment status<cr>", desc = "View current status of the plugin" },
-}, { mode = "n" })
-wk.add({
-	{ "<leader>C", group = "Github Copilot", nowait = true, remap = false },
-	{ "<leader>Cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat" },
-	{ "<leader>Cq", "<cmd>CopilotChatClose<cr>", desc = "Close Chat" },
-	{ "<leader>Ct", "<cmd>CopilotChatOpen<cr>", desc = "Open Chat" },
-	{ "<leader>Cr", "<cmd>CopilotChatReset<cr>", desc = "Reset Chat" },
-	{ "<leader>Cs", "<cmd>CopilotChatStop<cr>", desc = "Stop current output" },
 }, { mode = "n" })

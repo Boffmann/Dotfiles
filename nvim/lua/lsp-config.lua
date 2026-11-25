@@ -1,33 +1,6 @@
--- Reserve a space in the gutter
--- This will avoid an annoying layout shift in the screen
-vim.opt.signcolumn = "yes"
-
+-- Show diagnostics as virtual text only on the cursor line
 vim.diagnostic.config({
-	virtual_text = false,
-})
-
-local ns = vim.api.nvim_create_namespace("CurlineDiag")
-vim.opt.updatetime = 100
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		vim.api.nvim_create_autocmd("CursorHold", {
-			buffer = args.buf,
-			callback = function()
-				pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)
-				local hi = { "Error", "Warn", "Info", "Hint" }
-				local curline = vim.api.nvim_win_get_cursor(0)[1]
-				local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline - 1 })
-				local virt_texts = { { (" "):rep(4) } }
-				for _, diag in ipairs(diagnostics) do
-					virt_texts[#virt_texts + 1] = { diag.message, "Diagnostic" .. hi[diag.severity] }
-				end
-				vim.api.nvim_buf_set_extmark(args.buf, ns, curline - 1, 0, {
-					virt_text = virt_texts,
-					hl_mode = "combine",
-				})
-			end,
-		})
-	end,
+	virtual_text = { current_line = true },
 })
 
 -- Neovim 0.12 sends textDocument/diagnostic for a server-initiated refresh even while the
@@ -41,39 +14,18 @@ vim.lsp.handlers["workspace/diagnostic/refresh"] = function(err, res, ctx)
 	return diag_refresh(err, res, ctx)
 end
 
--- Add cmp_nvim_lsp capabilities settings to lspconfig
--- This should be executed before you configure any language server
-local lspconfig_defaults = require("lspconfig").util.default_config
-lspconfig_defaults.capabilities =
-	vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+-- Advertise nvim-cmp completion capabilities to every server
+vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
--- Mason setup
+-- Mason setup; mason-lspconfig v2 auto-enables installed servers via vim.lsp.enable
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	-- Replace the language servers listed here
-	-- with the ones you want to install
 	ensure_installed = {
 		"lua_ls",
 		"clangd",
 	},
-	handlers = {
-		function(server_name)
-			require("lspconfig")[server_name].setup({})
-		end,
-	},
 })
-vim.lsp.config("rust_analyzer", { capabilities = lspconfig_defaults.capabilities })
 vim.lsp.enable("rust_analyzer")
-require("mason-null-ls").setup({
-	ensure_installed = {
-		"stylua",
-		"jq",
-		"clang-format",
-		"shellcheck",
-		"jdtls",
-	},
-})
-
 -- Autocompletion setup
 local cmp = require("cmp")
 
