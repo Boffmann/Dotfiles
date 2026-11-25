@@ -21,8 +21,13 @@ vim.api.nvim_create_autocmd({'BufWritePre'}, {
 
 vim.api.nvim_create_autocmd({'BufWritePre'}, {
     group = autocmd_group,
-    buffer = bufnr,
-    callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr })
+    callback = function(args)
+        vim.lsp.buf.format({
+            bufnr = args.buf,
+            -- rustfmt via rust-analyzer; dprint has no config for Rust files
+            filter = function(client)
+                return not (client.name == "dprint" and vim.bo[args.buf].filetype == "rust")
+            end,
+        })
     end,
 })

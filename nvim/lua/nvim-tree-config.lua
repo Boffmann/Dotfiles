@@ -28,5 +28,9 @@ require("nvim-tree").setup({
 			quit_on_open = true,
 		},
 	},
+	update_focused_file = {
+		enable = true,
+		update_root = true,
+	},
 	---
 })

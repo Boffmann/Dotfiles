@@ -30,6 +30,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- Neovim 0.12 sends textDocument/diagnostic for a server-initiated refresh even while the
+-- client is shutting down; rust-analyzer then errors with "Shutdown already requested" on :wq.
+local diag_refresh = vim.lsp.handlers["workspace/diagnostic/refresh"]
+vim.lsp.handlers["workspace/diagnostic/refresh"] = function(err, res, ctx)
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
+	if client and client:is_stopped() then
+		return vim.NIL
+	end
+	return diag_refresh(err, res, ctx)
+end
+
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
 -- This should be executed before you configure any language server
 local lspconfig_defaults = require("lspconfig").util.default_config
@@ -43,7 +54,6 @@ require("mason-lspconfig").setup({
 	-- with the ones you want to install
 	ensure_installed = {
 		"lua_ls",
-		"rust_analyzer",
 		"clangd",
 	},
 	handlers = {
@@ -52,12 +62,15 @@ require("mason-lspconfig").setup({
 		end,
 	},
 })
+vim.lsp.config("rust_analyzer", { capabilities = lspconfig_defaults.capabilities })
+vim.lsp.enable("rust_analyzer")
 require("mason-null-ls").setup({
 	ensure_installed = {
 		"stylua",
 		"jq",
 		"clang-format",
 		"shellcheck",
+		"jdtls",
 	},
 })
 
